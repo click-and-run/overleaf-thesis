@@ -1,0 +1,79 @@
+De nombreuses tâches relativement manuelles doivent être effectuées pendant les cycles de dévelopement, publication,
+mises en production et autres.
+Ces tâches ne sont pas forcémment compliquées mais elles sont obligatoires et parfois critiques.
+Elles doivent être accomplies avec attention et rigueur.
+
+Ces tâches sont par exemple la validation du contenu d'un fichier excel, l'extraction de ce même contenu vers une base des données,
+la création de licenses ou encore l'analyse statistique de la base de données.
+
+Il est impératif de pouvoir s'assurer de leur bon déroulement et de pouvoir obtenir un rapport détaillé
+de leur exécution.
+
+\section{Le client}
+\label{sec:customer}
+
+    \paragraph{}
+    Altissia est une entreprise travaillant dans le domaine de l'apprentissage des langues étrangères.
+    Elle propose des formations en lignes.
+    Elle développe les plateformes informatiques, crée le contenu de cours, fournit du support aux utilisateurs et héberge une
+    partie de son infrastructure.
+    Son catalogue contient 31 langues d'interfaces et 26 langues d'apprentissages\footnote{Information vraie au 11 Janvier 2019.}.
+    Elle se distingue de ses concurrents par son identité académique en proposant des cours complets permettant de passer de débutant à expert.
+
+    \paragraph{}
+    Son siège principal se trouve en Belgique mais elle a aussi des sièges en France, au Brésil, au Canada et au Maroc.
+    Environ 80 employés travaille en son sein dont 60 sur le site de Louvain-la-Neuve.
+    Nous collaborons avec le CLL et l'UCL dans la création de notre contenu.
+
+    Nos clients sont principalement des institutions comme l'Union Européenne ou la Région Wallonne, des écoles ou encore
+    des entreprises privées qui veulent former, respectivement, leurs citoyens, leurs étudiants et leurs collaborateurs.
+
+    \paragraph{}
+    Altissia propose des cours sur sites internets et applications mobiles, des classes à distance, des articles de presses
+    avec traduction assistée, un réseau social et des tables de conversations.
+    Et fait donc face à de nombreux concurrents présents sur différentes plateformes.
+    On peut citer Rosetta Stone, Duolinguo, Babel, MemRise, italki ou encore HelloTalk mais la liste est sans fin.
+
+    \paragraph{}
+    L'application sera utilisée par le service linguistique et informatique qui sont conjointement responsables du contenu de cours
+    et du développement des plateformes de cours.
+    Ces deux services comptabilisent une quarantaine de personnes et comporte des profils de linguistes, développeurs informatiques,
+    concepteurs d'interfaces, administrateurs systèmes, chefs de projets et analyste commerciaux.
+
+\section{La demande initiale}
+\label{sec:initial-demande}
+
+    \paragraph{}
+    Certaines tâches sont actuellement effectuées par un projet de scripts \href{https://ant.apache.org/}{Apache Ant}.
+    Malheureusement, seuls des développeurs sont capables d'utiliser cet outil avec la ligne de commande ou leur IDE.
+    De plus ces scripts ne sont pas facilement maintenables et ne couvrent plus tous les besoins.
+
+    \paragraph{}
+    Dans un premier temps, la nouvelle application devra reprendre une fonctionalité du projet existant.
+    La première fonctionalité choisie sera la validation du contenu d'un fichier Excel;
+    il faut tester si il adhère à un ensemble de règles.
+    De plus, l'utilisation de cette fonctionalité doit être entièrement possible par une personne non développeur.
+    Enfin, le rapport d'exécution de chaque tâche doit être sauvegardé.
+
+\section{Les produits existants}
+\label{sec:existing-products}
+
+    \paragraph{}
+    Différents produits auraient pu nous intéresser comme par exemple
+    \href{https://ifttt.com/}{IFTTT},
+    \href{https://zapier.com/}{Zapier} ou
+    \href{https://flow.microsoft.com/fr-fr/}{Microsoft Flow}.
+    Ces outils gère tous l'aspect de journalisation, leurs interfaces sont conviviales et elles remplissent certains de nos besoins métiers.
+    Quoiqu'il arrive, certains de nos besoins métiers sont uniques et nous devrons les implémenter nous même à travers des modules.
+    On pourrait par exemple tirer parti des \href{https://powerapps.microsoft.com/fr-fr/}{PowerApps} de \href{https://flow.microsoft.com/fr-fr/}{Microsoft Flow}.
+
+    \paragraph{}
+    Toutefois, dès lors que l'on sort de l'écosystème de l'outil que nous aurions choisis, le framework de ce dernier ne nous apporterait que peu d'aide.
+    Beaucoup de nos besoins métiers ne correspondent pas exactement à ces outils et nous serions laissés à nous mêmes.
+    Aussi, un problème majeur est le système d'authentification de nos différentes ressources internes;
+    Un accès \href{https://fr.wikipedia.org/wiki/Samba_(informatique)}{SAMBA} ou
+    une authentification sur un \href{https://fr.wikipedia.org/wiki/Annuaire}{annuaire} ne poserait pas de soucis
+    mais l'intégration avec nos micro services serait très complexe à mettre en oeuvre.
+
+    \paragraph{}
+    Ainsi, en développant un outil qui corresponde exactement à nos besoins et sur lequel nous avons totalement la main, nous espérons obtenir un meilleur résultat.

@@ -1,0 +1,79 @@
+\documentclass[12pt]{report}
+\usepackage{polyglossia}
+\usepackage{csquotes}
+\setmainlanguage{french}
+\usepackage{fancyvrb} % insert content without interpreting as LaTeX
+\usepackage[backend=biber]{biblatex} % bibliography management
+\addbibresource{thesis.bib}
+\usepackage[pdfborder={0 0 0.6}]{hyperref} % add hypertext reference support to navigate from and within the document
+
+\begin{document}
+    \input{pages/titlepage} % title page occupies first page
+    \input{pages/empty-page.tex} % title page must be followed by an ampty page
+    \input{pages/titlepage} % and then a copy of itself (weird, I know)
+
+	% set my own counter so that I can style it however I want
+	\setcounter{page}{1}
+
+	\chapter*{Licence}
+	\VerbatimInput{LICENSE.txt}
+	\clearpage
+
+	% style page number with roman numbers
+	\renewcommand{\thepage}{\roman{page}}
+
+	\tableofcontents
+	\clearpage
+
+	% style page number with arabic numbers
+	\renewcommand{\thepage}{\arabic{page}}
+
+	\chapter{Note des versions}
+	\label{ch:versions}
+
+	\input{pages/versions}
+
+	\chapter{Introduction}
+	\label{ch:introduction}
+
+		\input{pages/introduction}
+
+	\chapter{Contexte}
+	\label{ch:context}
+
+	    \input{pages/context}
+
+	\chapter{Cahier des charges}
+	\label{ch:specifications}
+
+		\input{pages/specifications.tex}
+
+	\chapter{Analyse}
+	\label{ch:analysis}
+
+		TODO
+
+	\chapter{Réalisation}
+	\label{ch:implementation}
+
+		TODO
+
+	\chapter{Évolutions immédiates pressenties}
+	\label{ch:next-steps}
+
+		TODO
+
+	\chapter{Évaluation du travail}
+	\label{ch:auto-critic}
+
+		TODO
+
+	\chapter{Conclusion}
+	\label{ch:conclusion}
+
+		TODO
+
+	\printbibliography
+
+	\input{pages/empty-page} % last page must be empty
+\end{document}
