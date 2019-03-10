@@ -1,0 +1,33 @@
+\chapter{Les composants Angular pour la validation et le traitement des fichiers}
+\label{ch:angular-components}
+
+\Gls{g-angular} prévoit différents types d'objets en fonction de leur usage:
+\begin{itemize}
+    \item Le composant: un élément graphique avec un comportement associé
+    \item La directive: un comportement que l'on peut associer à un composant
+    \item Le service: un service disponible auprès de tous les autres objets
+    \item Le module: il regroupe d'autres objets afin de former un ensemble cohérent
+\end{itemize}
+
+Pour la validation et le traitement des classeurs, j'ai implémenté deux modules, un module pour la gestion des fichiers et un pour la gestion des classeurs.
+
+\section{La gestion des fichiers}
+\label{sec:file-management}
+
+\paragraph{}
+Il existe de nombreuses librairies pour la gestion des fichiers sur internet, mais toutes me posaient soit le problème de la compatibilité ou un problème de qualité.
+J'ai donc fait le choix d'en concevoir une moi-même.
+
+\paragraph{}
+Une directive se charge du gros du travail et implémente tout les comportements nécessaires.
+Tandis qu'un composant gère l'aspect visuel et expose les fonctionnalités de la directive qu'il utilise.
+
+La directive:
+\lstinputlisting[]{pages/appendix/code/dragndrop.directive.ts}
+
+Le code gérant la logique du composant:
+\lstinputlisting[]{pages/appendix/code/dragndrop.component.ts}
+
+Le code gérant la structure visuelle du composant:
+\lstinputlisting[language=html]{pages/appendix/code/dragndrop.component.html}
+Bien que mon cas d'utilisation ne requière, pour le moment, qu'un seul fichier à la fois, le composant est déjà prêt pour en gérer plusieurs.

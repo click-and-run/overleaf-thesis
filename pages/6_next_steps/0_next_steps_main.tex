@@ -1,0 +1,28 @@
+\chapter{Évolutions immédiates pressenties}
+\label{ch:next-steps}
+
+\paragraph{}
+La section \ref{sec:future-release-outlook} discutait déjà des fonctionnalités voulues et prioritaires.
+Toutefois, le projet Altiman dans son ensemble n'est plus prioritaire.
+En effet, il a rempli son rôle pour le projet client en cours de déploiement et tant qu'il ne sera pas lui-même déployé,
+y rajouter de nouvelles fonctionnalités ne serait pas rentable.
+
+\paragraph{}
+Lorsqu'Altissia pourra de nouveau consacrer du temps et des ressources au projet Altiman,
+la paire de fonctionnalités les plus demandées est la gestion asynchrone du traitement et le système de notification.
+
+\paragraph{}
+En effet, un problème est survenu lorsque Click-and-Run a dû traiter des fichiers très volumineux.
+Son temps de réponse était supérieur au temps maximum autorisé par la passerelle qui a donc rejeté sa réponse.
+Dans un environnement de développement, c'est un problème facile à contourner.
+Il suffit de configurer un temps de réponse supérieure.
+Cette solution est par contre très loin d'être idéale dans un environnement de production.
+
+La gestion des notifications prend tout son sens dans un système asynchrone et il serait donc dommage de se passer de cette victoire facile.
+
+\paragraph{}
+Une évolution qui a été abandonnée est le système de chargement de modules à chaud.
+J'étais très enthousiaste à l'idée d'affronter ce défi technique qui était inaccessible avec les connaissances dont je disposais avant le début du projet, mais j'ai dû malheureusement abandonner, car le développement était complexe et le gain faible.
+Redémarrer le \gls{g-server} pour charger de nouveaux modules est très facile pour une application interne dont personne ne se sert la nuit...
+
+J'ai tout de même pu mettre en pratique les connaissances acquises en Python dans le cadre d'un autre projet.

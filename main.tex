@@ -1,16 +1,54 @@
-\documentclass[12pt]{report}
-\usepackage{polyglossia}
-\usepackage{csquotes}
+\documentclass[12pt,twoside,openright]{report}
+\usepackage{polyglossia} % enable TeX to generate text in target language. Also add support to languages (correct quoting style, etc.)
 \setmainlanguage{french}
+\usepackage{csquotes} % required to use polyglossia apparently, also handle quotes
 \usepackage{fancyvrb} % insert content without interpreting as LaTeX
 \usepackage[backend=biber]{biblatex} % bibliography management
-\addbibresource{thesis.bib}
+\addbibresource{references.bib}
 \usepackage[pdfborder={0 0 0.6}]{hyperref} % add hypertext reference support to navigate from and within the document
+\usepackage{float} % to correctly position images or any figure environment
+\usepackage{graphicx} % manage images
+\graphicspath{ {./images/} } % set default path to images
+\usepackage{wrapfig}
+\restylefloat{figure} % again, to correctly position images or any figure environment
+\usepackage{hyperref} % manage URL
+\usepackage{appendix} % manage annexe numbering
+\usepackage{pdfpages} % to insert pdf
+\usepackage{listings} % to insert programming source code
+\usepackage{color} % color for programming source code
+\usepackage[acronym,toc]{glossaries} % to make a glossary
+\usepackage{amsmath} % write math stuff
+
+\loadglsentries{acronyms.tex}
+\loadglsentries{glossaries.tex}
+\makeglossaries
+
+\lstset
+{ %Formatting for code in appendix
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{gray}
+}
+
+% custom handling of footnotes so I don't have to put them inline or manager counting myself
+\newcounter{footnoteMarkCount}
+\newcounter{footnoteTextCount}
+\newcommand{\fnmark}{\stepcounter{footnoteMarkCount}\setcounter{footnote}{\value{footnoteMarkCount}}\addtocounter{footnote}{-1}\footnotemark}
+\newcommand{\fntext}[1]{\stepcounter{footnoteTextCount}\setcounter{footnote}{\value{footnoteTextCount}}\footnotetext{#1}}
 
 \begin{document}
     \input{pages/titlepage} % title page occupies first page
     \input{pages/empty-page.tex} % title page must be followed by an ampty page
     \input{pages/titlepage} % and then a copy of itself (weird, I know)
+    \input{pages/empty-page.tex} % title page must be followed by an ampty page
 
 	% set my own counter so that I can style it however I want
 	\setcounter{page}{1}
@@ -27,51 +65,27 @@
 
 	% style page number with arabic numbers
 	\renewcommand{\thepage}{\arabic{page}}
+	
+	\printglossary[title=Glossaire]
+	\printglossary[type=\acronymtype,title=Acronymes]
 
-	\chapter{Note des versions}
-	\label{ch:versions}
+	\input{pages/1_introduction/0_introduction.tex}
 
-	\input{pages/versions}
+    \input{pages/2_context/0_context-main.tex}
 
-	\chapter{Introduction}
-	\label{ch:introduction}
+	\input{pages/3_specifications/0_specifications-main.tex}
 
-		\input{pages/introduction}
+    \input{pages/4_analysis/0_analysis-main.tex}
 
-	\chapter{Contexte}
-	\label{ch:context}
+	\input{pages/5_implementation/0_imp_main.tex}
+    
+    \input{pages/6_next_steps/0_next_steps_main.tex}
+    
+    \input{pages/7_evaluation/0_evaluation_main.tex}
 
-	    \input{pages/context}
-
-	\chapter{Cahier des charges}
-	\label{ch:specifications}
-
-		\input{pages/specifications.tex}
-
-	\chapter{Analyse}
-	\label{ch:analysis}
-
-		TODO
-
-	\chapter{Réalisation}
-	\label{ch:implementation}
-
-		TODO
-
-	\chapter{Évolutions immédiates pressenties}
-	\label{ch:next-steps}
-
-		TODO
-
-	\chapter{Évaluation du travail}
-	\label{ch:auto-critic}
-
-		TODO
-
-	\chapter{Conclusion}
-	\label{ch:conclusion}
-
-		TODO
+    \input{pages/8_conclusion/0_conclusion_main.tex}
+		
+	\input{pages/appendix.tex}
 
 	\printbibliography
 

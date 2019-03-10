@@ -1,0 +1,44 @@
+\subsection{La page de validation et traitement des classeurs}
+\label{subsec:spreadsheet-page}
+
+\paragraph{}
+La page de validation et traitement des données est la page centrale de l'application et c'est elle qui va justifier le plus de travail.
+Son fonctionnement doit être le plus simple possible.
+Un \textbf{utilisateur} doit pouvoir s'en servir sans formation et ses actions ne peuvent pas tromper ses intentions.
+
+\paragraph{}
+La page est divisée en trois éléments:
+\begin{itemize}
+    \item Le récepteur de fichier: il permet de choisir le fichier que l'on valide
+    \item Le tableau des résultats: il affiche les résultats de la validation
+    \item Le bouton de traitement: il lance le traitement du fichier validé
+\end{itemize}
+
+\paragraph{}
+Le récepteur de fichier permet de choisir un fichier de deux manières, soit en cliquant dessus, soit en glissant et en déposant un fichier sur lui.
+Dans le premier cas, il ouvre le menu système\fnmark{} de l'utilisateur. Dans le second cas, l'utilisateur a cliqué sur le fichier et a maintenu le clic, a glissé le fichier au-dessus du composant et a relâché le clic.
+\fntext{Le menu système est le menu prévu par le système d'exploitation installé sur la machine de l'utilisateur}
+
+Dans le cas où le fichier n'est pas compatible, car il n'est pas un fichier Excel ou est corrompu, un message d'erreur renseigne l'utilisateur.
+Dans le cas où le fichier est compatible, la validation de son contenu est immédiatement lancée sans autre action de l'utilisateur.
+
+Le nom du fichier sélectionné avec succès est affiché sur le récepteur.
+
+Un doubleclic sur le récepteur vide le fichier.
+
+Des instructions indiquent les actions à prendre en fonction de l'état du fichier: présent ou non présent. % TODO gérer valide et non valide ?
+
+\paragraph{}
+Le tableau des résultats affiche les erreurs de validation relevées par le \gls{g-server}.
+Le résultat de chaque feuille est affiché dans son propre onglet.
+Les erreurs sont divisées en trois tableaux distincts: les problèmes de titre, les erreurs de contenu et les avertissements sur le contenu.
+Pour les problèmes de titres, le numéro de colonne, le titre de la colonne, la valeur dans le fichier pour cette colonne et le message d'erreur sont affichés.
+Le message d'erreur est exprimé dans un langage intelligible par un \textbf{utilisateur}.
+Les mêmes champs sont utilisés par les erreurs et avertissements si ce n'est que la colonne devient une ligne.
+Les erreurs sont affichées dans l'ordre des lignes.
+
+\paragraph{}
+Le bouton de traitement n'est utilisable que si le fichier a passé la validation.
+Son activation envoie le fichier déjà sélectionné et déjà validé pour son traitement.
+En cas de succès, ce qui est sensé toujours être le cas, un message de succès apparait et le fichier est vidé du récepteur de fichier.
+

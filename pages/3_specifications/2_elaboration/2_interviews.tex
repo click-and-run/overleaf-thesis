@@ -1,0 +1,33 @@
+\subsection{Les interviews}
+\label{subsec:interviews}
+
+\paragraph{}
+J'ai eu une première interview avec Grégory pour définir le besoin général et le contexte qui l'entoure.
+Il explique qu'en facilitant la vérification et la conversion des nouveaux contenus des cours, l'application permettrait d'accélérer l'intégration des nouveaux contenus de cours dans nos plateformes.
+
+Nous discutons de la forme que cette application va prendre. 
+Je propose de la structurer en trois parties: une librairie applicative, un serveur et une libraire de composants web.
+Après discussions, nous concluons qu'il n'est pas utile de former une librairie et que de directement intégrer les fonctionnalités dans un serveur simplifiera le développement.
+
+Il s'agit donc de créer une application serveur qui s'occupe de la manipulation des données et une application cliente qui affiche les données et enregistre les choix de l'utilisateur.
+Sous cette forme, Altissia pourra facilement personnaliser\fnmark{} l'application pour l'intégrer aux logiciels existants.
+\fntext{Il s'agit ici de faire un \textit{fork} de l'application. Une sorte de copie que l'on personnalise sans modifier l'originale, mais qui peut toujours obtenir les dernières mises à jour de la source.}
+
+\paragraph{}
+Ensuite, j'ai eu une réunion avec Renaud et Sophie.
+À deux, ils ont défini les problèmes rencontrés avec l'outil existant et pourquoi on veut le remplacer.
+
+Renaud connait très bien l'outil que l'on veut remplacer, Altissia launcher, il m'a expliqué les difficultés rencontrées pendant son développement et comment il a terminé dans son état actuel.
+La principale cause est le temps de développement nécessaire pour prendre en charge de nouveaux formats et la difficulté d'utilisation qui encourage les utilisateurs à s'en passer.
+
+Sophie a établi la liste des manquements du logiciel actuel qu'il faudrait suppléer et les fonctionnalités qu'elle voudrait ajouter.
+Certaines règles ne sont pas vérifiées, les codes d'erreur sont cryptiques et certaines informations pourraient accompagner les erreurs afin d'en faciliter la correction.
+
+\paragraph{}
+Par la suite, nous avons continué de nous rencontrer dans le cadre des réunions SCRUM:
+\begin{itemize}
+    \item Le \textit{daily standup}: courte réunion quotidienne pour informer de l'avancement et toute difficulté rencontrée
+    \item Le \textit{sprint planning}: Réunion bimensuelle où l'on planifie les deux prochaines semaines
+    \item Le \textit{backlog refinement}: Réunion bimensuelle où l'on clarifie la définition des fonctionnalités pour s'assurer qu'elles sont correctement comprises et prêtes à être implémentées.
+    \item La \textit{Review}: Réunion bimensuelle en fin de sprint où l'on présente les résultats produits durant la période à toutes personnes intéressées.
+\end{itemize}

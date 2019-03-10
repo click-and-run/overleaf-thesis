@@ -1,0 +1,74 @@
+\subsection{Le fonctionnement de Click-and-Run}
+\label{subsec:operation}
+
+\paragraph{}
+Le but de la validation est d'apporter le plus d'informations possible à l'\textbf{utilisateur} afin qu'il puisse corriger lui-même le classeur qu'il a soumis.
+De manière générale, le vérificateur va donc essayer d'en trouver le plus possible et ne s'arrêtera pas au premier cas rencontré.
+Il y a néanmoins certains cas d'erreurs qu'il faut envisager différemment.
+
+\subsubsection{La vérification des entêtes ou du contenu}
+\label{subsubsec:headers-validation}
+
+\paragraph{}
+Lorsqu'une feuille est manquante ou que les entêtes ne sont pas valides, son contenu n'est pas validé.
+Cela relèverait trop d'erreurs qui ne feront pas forcément sens.
+Par exemple, si l'entête d'un champ obligatoire est manquant, chaque ligne va déclarer le champ comme manquant.
+
+De plus, les validations propres aux feuilles plutôt qu'au contenu ne seront pas exécutées non plus.
+Cela concerne par exemple la vérification des contraintes de référence.
+Dans notre cas d'utilisation, si la feuille des apprenants est vide, il ne sera pas possible de vérifier qu'un service est lié à un élève défini dans cette feuille.
+Mais la feuille des services peut par contre valider ses règles propres.
+
+\paragraph{}
+Il n'est donc pas possible d'avoir à la fois des erreurs dans les entêtes et dans le contenu, car le premier empêche le deuxième.
+
+\subsubsection{La vérification par lot}
+\label{subsubsec:batch-validation}
+
+\paragraph{}
+Dans les cas où la vérification d'une règle nécessite d'accéder à une ressource externe, comme un \gls{a-api} ou une base de données,
+elle se fera à la fin de la vérification de la feuille et une seule fois plutôt qu'une fois par ligne afin de réduire la lenteur qu'engendrerait ces multiples appels.
+
+Lorsque l'on vérifie qu'un email n'est pas déjà utilisé dans la base de données, on pourrait vérifier ligne par ligne.
+Ce serait très inefficace, car un appel à une ressource externe est très lent, si on le compare à l'exécution d'un code autonome.
+Il est bien plus optimal, à la fois pour la vérification et pour le service externe concernée, de faire un seul appel qui livre toutes informations requises en une seule fois.
+
+\paragraph{}
+Pour la vérification de l'existence des emails, le programme devra donc constituer la liste complète, vérifier leur présence en base de données en une seule requête et mettre en erreur toutes les lignes liées aux emails qui existaient.
+
+\paragraph{}
+Un autre cas concerné problématique lors d'une approche ligne par ligne est la contrainte d'unicité.
+En effet, pour vérifier qu'une valeur est unique, il est préférable de le faire avec la liste complète plutôt que de le faire au fur et à mesure.
+
+C'est un problème de complexité temporelle.
+La complexité temporelle exprime le rapport entre le temps d'exécution d'un programme et la taille des données qu'il traite.
+Ici, la taille du problème est le nombre de lignes, que l'on va appeler $n$.
+Dans le cas où l'on vérifie la contrainte à chaque ligne, on doit considérer toutes les lignes précédentes pour chaque ligne.
+Le calcul du temps d'exécution est donc le suivant:
+\begin{align}
+line_1&= 1 \\
+line_2&= 2 \\
+line_3&= 3 \\
+line_n&= n \\
+\sum_1^n &= 1+2+3+...+n \\
+\sum_1^n &= \frac{n^2 + n}{2}
+\end{align}
+Il n'y a pas d'unité à ce calcul, la seule notion importante est la fonction appliquée à $n$.
+Et on ne retient que la fonction qui évolue le plus rapidement.
+C'est donc le carré de $n$ qui est retenu.
+On note cette complexité temporelle $O(n^2)$, qui veut dire quand dans le pire des cas, le temps d'exécution du programme est proportionnel au carré de $n$.
+
+Dans le cas où l'on traite toutes les lignes en une seule fois, on doit constituer une liste triée, parcourir cette liste pour calculer le nombre d'apparitions de cette valeur dans la liste.
+Trier la liste permet de retrouver très rapidement n'importe quelle valeur dans cette liste.
+Trier la liste a une complexité $O(log(n))$ et lire un élément aléatoire de cette liste a une complexité $O(1)$ qui exprime un temps constant, non dépendant du nombre d'éléments.
+Il faut lire $n$ éléments une fois ce qui donne une complexité $O(n)$.
+
+L'opération du tri et l'opération du parcours de la liste sont faites séquentiellement et leurs complexités doivent donc s'additionner.
+Dans le cas d'une addition, seule la fonction la plus forte est gardée, c'est à dire $O(n) + O(log(n)) = O(n)$.
+
+Vérifier l'unicité par lot plutôt que par ligne permet donc de réduire la complexité temporelle de $O(n^2)$ à $O(n)$.
+
+\subsubsection{La vérification entre feuilles}
+Vérifier qu'un email défini dans la feuille des apprenants est utilisé au moins une fois dans la liste des services et qu'un email utilisé dans la feuille des services est défini dans la feuille des apprenants nécessite une autre sorte de vérification.
+
+Il faut mettre en place une vérification qui dispose de l'entièreté du classeur.

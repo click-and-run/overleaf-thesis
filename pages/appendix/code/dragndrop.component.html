@@ -1,0 +1,7 @@
+<div class="dropzone" jhiDragndrop [(files)]="files" (filesChange)="onFilesChange($event)" [fileLimit]="fileLimit">
+    <div class="text-wrapper">
+        <div *ngIf="files.length === 0" class="centered" jhiTranslate="dragndrop.drop-file-instruction"></div>
+        <div *ngIf="files.length > 0" class="centered" jhiTranslate="dragndrop.clear-file-instruction"></div>
+        <div *ngFor="let file of files" class="centered"><small>{{file.name}}</small></div>
+    </div>
+</div>

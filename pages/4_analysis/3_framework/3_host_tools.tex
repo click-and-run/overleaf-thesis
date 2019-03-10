@@ -1,0 +1,28 @@
+\subsection{Des outils à intégrer}
+\label{subsec:host-tools}
+
+\paragraph{}
+Certaines règles sont trop spécifiques et il n'est pas possible de les généraliser.
+Il est par contre possible de simplifier la vie du développeur qui va devoir les ajouter en prévoyant un système qui va détecter la règle et l'appliquer au bon moment et dans les bons cas.
+
+\paragraph{}
+La personne qui veut rajouter une règle dispose de trois points d'entrée:
+\begin{itemize}
+    \item Le modèle d'une feuille: elle peut associer sa règle au modèle qui représente une ligne
+    \item La validation de feuille: elle peut ajouter un service qui sera appelé lors de la validation de la feuille
+    \item la validation de classeur: elle peut ajouter un service qui sera appelé lors de la validation du classeur
+\end{itemize}
+Afin que cela fonctionne, elle doit respecter les formats prévus par mon application.
+
+\paragraph{}
+La règle d'un modèle est appliquée sous la forme d'une annotation \textit{javax.validation.constraints}.
+C'est un format standard pour la validation que je discute dans la section suivante.
+
+\paragraph{}
+Pour la validation d'une feuille ou d'un classeur, le développeur doit créer un service qui doit:
+\begin{enumerate}
+    \item Indiquer qu'il est capable de traiter le type de données que la validation est en train de vérifier
+    \item Implémenter une méthode avec une signature précise qui effectue la vérification
+\end{enumerate}
+Ce mécanisme correspond au patron de conception de la stratégie.
+Il est discuté dans la section \ref{subsec:class-diagram}.

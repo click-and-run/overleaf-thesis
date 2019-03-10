@@ -1,0 +1,75 @@
+\section{Définition de la première version de l'application}
+\label{sec:first-version-definition}
+
+Les besoins sont nombreux, mais il est nécessaire de s'arrêter sur un périmètre défini pour une première version.
+Cela permettra d'obtenir un retour d'information sur les choix pris et de s'adapter aux besoins.
+
+\subsection{Besoins métiers}
+\label{subsec:business-needs}
+
+\paragraph{}
+La première version de l'application aura pour but de satisfaire un besoin dans le cadre de la prochaine version de l'application mobile de cours en ligne qui est déployé le 20 mai 2019.
+Spécifiquement, les éléments de structure des cours ont été écrits dans plusieurs classeurs Excel.
+Il faut valider leur format et utiliser les données pour créer les entrées correspondantes dans une base de données MySQL.
+Ces éléments de structure sont les suivants:
+\begin{itemize}
+    \item Parcours d'apprentissage
+    \item Mission
+    \item Leçon
+    \item Activité
+    \item Exercice
+\end{itemize}
+
+Ces structures comportent toutes sortes d'attributs dont les valeurs doivent respecter leur domaine de définition.
+Ces attributs sont par exemple: des titres, des identifiants, des niveaux de difficulté, des thèmes (job, vacances, vie quotidienne, etc.) ou encore des sujets d'apprentissages (prononciation, grammaire, etc.).
+
+\paragraph{}
+Par exemple, parmi les attributs, il y a le code de la langue qui doit être au format de la norme \textit{RFC 4647}\cite{davis_matching_nodate} (4 lettres séparées par un trait d'union ou un trait de soulignement).
+Le niveau de difficulté est un élément de la liste du cadre européen commun de référence pour les langues\cite{noauthor_cadre_nodate}: A1, A2, B1, B2, C1 et C2.
+Le type de la leçon est un mot parmi une liste finie.
+Le titre de la leçon est une suite de mots arbitraires.
+Le type de l'activité est un mot parmi une liste finie.
+Le titre de l'activité est une suite de mots.
+
+Chaque attribut apporte ses propres contraintes.
+
+\paragraph{}
+Il en résulte que pour la première version, il est nécessaire de pouvoir évaluer:
+\begin{itemize}
+    \item Le respect d'un modèle de chaine de caractères (une \gls{g-regex}).
+    \item La position d'une valeur numérique par rapport à une borne inférieure
+    \item La position d'une valeur numérique par rapport à une borne supérieure
+    \item L'inclusion d'une valeur numérique entre deux bornes
+    \item L'appartenance d'une valeur à un ensemble fini
+    \item Le résultat de l'évaluation d'une \gls{g-hash-func} arbitraire
+    \item La taille d'une chaine de caractères
+    \item La contrainte de référence\fnmark{} dans une base de données
+    \fntext{Une contrainte de référence signifie qu'une valeur doit exister dans le référentiel. Par exemple, mon nom de famille doit être porté par l'un de mes parents pour que je puisse le porter.}
+    \item La contrainte de référence dans un API externe
+    \item La contrainte de référence entre deux feuilles du même classeur
+    \item la valeur \gls{g-null}
+    \item Le respect du format des \textit{mails}
+    \item L'appartenance d'une valeur à un ensemble
+    \item L'unicité d'une valeur au sein de sa colonne
+    \item L'unicité d'une combinaison de valeurs au sein de sa feuille
+\end{itemize}
+
+\subsection{Besoins techniques}
+\label{subsec:tech-needs}
+
+\paragraph{}
+Afin d'avoir une gestion centrale de l'application et de s'assurer que la dernière version est toujours utilisée, nous avons fait le choix d'implémenter la solution sous la forme d'un site web.
+Ce choix était particulièrement évident, car c'est le coeur de métier d'Altissia et que l'entreprise dispose de très bonnes compétences en la matière.
+
+\paragraph{}
+Ce site web sera composé d'un serveur et d'une application cliente.
+Le serveur s'occupe de la validation et du traitement des données.
+L'application cliente présente les informations de manière visuelle et compréhensible et donne le contrôle à l'utilisateur.
+
+\paragraph{}
+Ce site web devra répondre aux impératifs de qualité et de sécurité d'Altissia.
+Cela inclut l'utilisation du système d'authentification existant, l'utilisation du système de licences\fnmark{} pour gérer les droits des utilisateurs, système de surveillance de la santé du serveur ainsi que les outils d'administration habituels (liste détaillée en sous-section \ref{subsec:admin-pages}).
+\fntext{Un utilisateur peut avoir plusieurs licences. Chaque service peut exiger certaines licences pour certaines fonctionnalités. Par exemple, l'administration des utilisateurs requiert les droits d'administrateur.}
+De plus, sur le plan technique, cela impose d'utiliser la même structure et les mêmes technologies que les applications existantes.
+Ces technologies sont détaillées dans le chapitre \ref{ch:analysis}.
+
