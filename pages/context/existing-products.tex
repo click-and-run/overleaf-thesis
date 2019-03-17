@@ -1,11 +1,27 @@
 \paragraph{}
-Différents produits auraient pu nous intéresser comme par exemple
-\href{https://ifttt.com/}{IFTTT},
+Lors de la recherche d'une solution existante, nous avons porté notre attention sur les points suivants:
+\begin{itemize}
+    \item Exécuter des programmes arbitraires
+    \item Tenir un journal des scripts exécutés
+    \item Visualiser l'historique des exécutions passées
+    \item Notifier un utilisateur de la fin de l'exécution d'une tâche
+    \item Chercher toute entité (script, exécution, résultat, utilisateur, etc.)
+    \item Contrôler l'identité de l'utilisateur
+    \item Contrôler les actions permises à un utilisateur donné
+\end{itemize}
+La nature de notre besoin est unique, il existe peu d'outils disponibles sur le marché.
+
+Les solutions les plus proches de notre besoin, comme par exemple Rundeck, ne sont pas destinées à des acteurs métiers mais bien à des techniciens informatiques et sont donc hors de question.
+
+\paragraph{}
+L'outil doit être compatible avec nos différentes interfaces de programmation applicatives\footnote{Une interface de programmation applicative (\textit{API} en anglais) est la partie d'un logiciel qui sert à communiquer avec un autre logiciel.}, nos système d'authentification et de licence.
 \href{https://zapier.com/}{Zapier} ou
 \href{https://flow.microsoft.com/fr-fr/}{Microsoft Flow}.
-Ces outils gère tous l'aspect de journalisation, leurs interfaces sont conviviales et elles remplissent certains de nos besoins métiers.
-Quoiqu'il arrive, certains de nos besoins métiers sont uniques et nous devrons les implémenter nous même à travers des modules.
+Ces outils gèrent tous la journalisation\footnote{En informatique, le concept d'historique des événements ou de journalisation désigne l'enregistrement séquentiel dans un fichier ou une base de données de tous les événements affectant un processus particulier (application, activité d'un réseau informatique…)\cite{wikipedia_historique_2018}.}, leurs interfaces sont conviviales et elles remplissent certains de nos besoins métiers.
+Dans tous les cas, nos besoins sont uniques à notre activité et nous devrons les implémenter nous même à travers des modules.
 On pourrait par exemple tirer parti des \href{https://powerapps.microsoft.com/fr-fr/}{PowerApps} de \href{https://flow.microsoft.com/fr-fr/}{Microsoft Flow}.
+
+\subsection{IFTTT}
 
 \paragraph{}
 Toutefois, dès lors que l'on sort de l'écosystème de l'outil que nous aurions choisis, le framework de ce dernier ne nous apporterait que peu d'aide.

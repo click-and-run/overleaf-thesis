@@ -1,11 +1,14 @@
 \paragraph{}
-Certaines tâches sont actuellement effectuées par un projet de scripts \href{https://ant.apache.org/}{Apache Ant}.
-Malheureusement, seuls des développeurs sont capables d'utiliser cet outil avec la ligne de commande ou leur IDE.
-De plus ces scripts ne sont pas facilement maintenables et ne couvrent plus tous les besoins.
+Des tâches sont actuellement effectuées par une bibliothèque de scripts \href{https://ant.apache.org/}{Apache Ant}\footnote{Apache Ant est un outil permettant de construire une application Java à partir de son code source. Une alternative plus connue est \href{https://maven.apache.org/}{Apache Maven}.}.
+Certaines sont effectuées avec des scripts codés en \href{https://www.python.org/}{Python}\footnote{Langage de programmation très populaire pour créer des scripts.}.
+Enfin d'autres sont réalisées avec le socle d'application\footnote{Socle d'application ou \textit{Framework} en anglais; ensemble cohérent de composants logiciels permettant de construire les fondations d'un logiciel\cite{wikipedia_framework_2019}.} Spring\footnote{Spring est un socle d'application Java.} Batch\footnote{Spring Batch est un composant du \textit{Framework} Spring permettant un traitement par lots de grande quantité de données.}.
 
 \paragraph{}
-Dans un premier temps, la nouvelle application devra reprendre une fonctionalité du projet existant.
-La première fonctionalité choisie sera la validation du contenu d'un fichier Excel;
-il faut tester si il adhère à un ensemble de règles.
-De plus, l'utilisation de cette fonctionalité doit être entièrement possible par une personne non développeur.
-Enfin, le rapport d'exécution de chaque tâche doit être sauvegardé.
+Malheureusement, seuls des développeurs sont capables d'utiliser ces outils.
+En effet, ils ne disposent pas d'interface graphique ou de connexion avec des programmes classiques\footnote{Il est existe une connexion entre certains modules Apache Ant et Excel mais c'est loin d'être ergonomique et est finalement peu utilisé.}.
+De plus, rien ne centralise ces applications, ce qui ne facilite pas non plus la vie des programmeurs.
+Ces programmes ont été écris au moment où ils étaient nécessaire sans trop de pensées vers l'architecture globale du système applicatif futur.
+Ce qui rends ces applications assez chers à maintenir et peu plaisantes à faire évoluer.
+
+\paragraph{}
+Le but principal du nouveau logiciel est de centraliser tous ces processus, fournir un cadre les rendant plus facile à développer et à faire évoluer et permettant leur utilisation au travers d'une interface graphique par un acteur métier.
