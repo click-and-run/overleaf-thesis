@@ -1,35 +1,30 @@
 \paragraph{}
-Lors de la recherche d'une solution existante, nous avons porté notre attention sur les points suivants:
+Lors de la recherche d'une solution existante, nous avons concentré notre attention sur les points suivants:
 \begin{itemize}
     \item Exécuter des programmes arbitraires
+    \item Permettre de définir les paramètres d'un programme au travers d'une interface graphique
     \item Tenir un journal des scripts exécutés
-    \item Visualiser l'historique des exécutions passées
     \item Notifier un utilisateur de la fin de l'exécution d'une tâche
     \item Chercher toute entité (script, exécution, résultat, utilisateur, etc.)
-    \item Contrôler l'identité de l'utilisateur
-    \item Contrôler les actions permises à un utilisateur donné
+    \item La courbe d'apprentissage de l'outil
 \end{itemize}
-La nature de notre besoin est unique, il existe peu d'outils disponibles sur le marché.
+Il existe de nombreux outils sur le marché mais malheureusement, ils sont tous destinés à des développeurs...
+Les plus connus sont Ansible, Rundeck, Salt, Chef et Fabric.
 
-Les solutions les plus proches de notre besoin, comme par exemple Rundeck, ne sont pas destinées à des acteurs métiers mais bien à des techniciens informatiques et sont donc hors de question.
+\subsection{Ansible}
 
-\paragraph{}
-L'outil doit être compatible avec nos différentes interfaces de programmation applicatives\footnote{Une interface de programmation applicative (\textit{API} en anglais) est la partie d'un logiciel qui sert à communiquer avec un autre logiciel.}, nos système d'authentification et de licence.
-\href{https://zapier.com/}{Zapier} ou
-\href{https://flow.microsoft.com/fr-fr/}{Microsoft Flow}.
-Ces outils gèrent tous la journalisation\footnote{En informatique, le concept d'historique des événements ou de journalisation désigne l'enregistrement séquentiel dans un fichier ou une base de données de tous les événements affectant un processus particulier (application, activité d'un réseau informatique…)\cite{wikipedia_historique_2018}.}, leurs interfaces sont conviviales et elles remplissent certains de nos besoins métiers.
-Dans tous les cas, nos besoins sont uniques à notre activité et nous devrons les implémenter nous même à travers des modules.
-On pourrait par exemple tirer parti des \href{https://powerapps.microsoft.com/fr-fr/}{PowerApps} de \href{https://flow.microsoft.com/fr-fr/}{Microsoft Flow}.
-
-\subsection{IFTTT}
+\subsection{Rundeck}
+Nous avons identifié Rundeck comme étant l'offre la plus proche de nos besoins.
+Toutefois, l'outil cible plutôt des techniciens et reste relativement complexe à utiliser.
+C'est d'ailleurs un outil que nous nos développeurs utilisent déjà, principalement pour des tâches de gestion des versions du code source.
 
 \paragraph{}
-Toutefois, dès lors que l'on sort de l'écosystème de l'outil que nous aurions choisis, le framework de ce dernier ne nous apporterait que peu d'aide.
-Beaucoup de nos besoins métiers ne correspondent pas exactement à ces outils et nous serions laissés à nous mêmes.
-Aussi, un problème majeur est le système d'authentification de nos différentes ressources internes;
-Un accès \href{https://fr.wikipedia.org/wiki/Samba_(informatique)}{SAMBA} ou
-une authentification sur un \href{https://fr.wikipedia.org/wiki/Annuaire}{annuaire} ne poserait pas de soucis
-mais l'intégration avec nos micro services serait très complexe à mettre en oeuvre.
+Dans notre instance de Rundeck, il existe une tâche appelée \textit{Republication}.
+Lancer cette tâche devrait être aussi simple que d'appuyer sur un bouton mais ce n'est malheureusement pas le cas.
+Il faut cliquer quatre fois pour l'exécuter et il n'y a pas de champs de recherche.
 
-\paragraph{}
-Ainsi, en développant un outil qui corresponde exactement à nos besoins et sur lequel nous avons totalement la main, nous espérons obtenir un meilleur résultat.
+De plus cette tâche peut être paramétrée, il est possible de choisir une langue à publier.
+Sauf que pour ce faire, il faut définir une variable d'environnement\footnote{variable d'environnement: variable définie au niveau du système d'exploitation permettant de partager sa valeur à différentes applications. Ici, elle permet à Rundeck, et donc l'utilisateur, de communiquer avec l'application \textit{Republication}}.
+Cette genre de technicité devrait être masqué afin de mettre l'outil dans les mains de n'importe qui.
+
+% todo insérer la figure

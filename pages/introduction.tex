@@ -1,22 +1,47 @@
+\chapter{Introduction}
+\label{ch:introduction}
+
 \paragraph{}
 Ces quatre dernières années, j'ai suivi les études pour acquérir le bachelier en informatique de gestion.
 Le développement informatique me donne l'impression que tout peut être automatisé.
-Ce présent travail est un argument en faveur de cette assertion et un formidable défi aux compétences et connaissances acquises lors de mon parcours académique.
+Ce présent travail est un argument en faveur de cette assertion et un formidable défi aux compétences et connaissances acquises lors de ma formation.
 
 \paragraph{}
 Je travaille à Altissia depuis deux ans.
 Je développe des nouvelles fonctionnalités, corrige des bogues et réalise différentes tâches opérationnelles.
-C'est cette dernière catégorie qui nous intéresse ici.
-
-Elle contient des tâches récurrentes et courtes, réalisables en deux jours ou moins.
-Elles constituent une étape indispensable au déploiement des nouveaux contenus sur les applications webs.
-Mais si on additionne le nombre de fois qu'il faut les effectuer, elles sont finalement chronophages.
 
 \paragraph{}
-De plus l'acteur métier qui a besoin du résultat de cette tâche doit souvent faire appel à un développeur. Cela induit une latence entre le besoin et sa réalisation et rends le premier dépendant du deuxième.
+J'ai commencé par le développement d'un module\footnotemark pour un outil appelé \href{https://www.jhipster.tech/}{JHipster}.
+Cet outil permet de créer les fondations d'un site web sur base d'une dizaine de questions.
+Il permet de gagner plusieurs jours de travail en générant le code source qui est de toute façon commun à la plupart des sites webs.
+Une fois ce code généré, le développeur reprends la main pour implémenter ce qu'il veut.
+
+Toutefois, la manière dont JHipster établissait la relation entre le code et la base de données\footnotemark ne nous convenait pas.
+Ainsi, afin d'amener l'automatisation apportée par JHipster une étape plus loin, un collègue et moi avons conçu ce module.
+
+\footnotetext{Les source de ce module sont libres et disponibles sur Github: \url{https://github.com/bastienmichaux/generator-jhipster-db-helper}.}
+\footnotetext{Je fais référence à l'ORM. C'est une partie du code qui a pour but d'abstraire la base de données afin que le développeur manipule des objets, au sens de la programmation orientée objet, plutôt que des tables et des enregistrements.}
 
 \paragraph{}
-Enfin, ces tâches utilisent des technologies et ressources variés et sont dispersées dans de multiples composants logiciels de l'entreprise.
+A l'heure actuelle, nous utilisons un programme appelé \textit{Altissia-launcher}.
+Ce programme valide les données contenues dans des fichiers Excel, il les manipule et les transforme afin qu'elles puissent être exploitées par d'autres composants logiciels de l'infrastructure de l'entreprise.
+Aussi, il convertit et concatène des fichiers de son.
+
+Malheureusement, cet outil est très loin d'être parfait.
+Il n'est utilisable que par un développeur car il ne dispose d'aucune interface, on l'exécute directement depuis l'IDE\footnotemark.
+De plus, même pour le développeur, il est difficile d'utilisation car pour mener à bien un processus complet, il reste nécessaire d'appliquer manuellement certaines tâches.
+Il faut par exemple, déplacer ou copier des fichiers d'un endroit à l'autre, lancer plusieurs scripts dans un certains ordre, etc.
+En fait, il est impératif de suivre une documentation\footnotemark pas à pas sous peine de se tromper et de devoir recommencer.
+Enfin, il utilise des technologies désuètes qui le rende très difficile à maintenir ou à faire évoluer.
+% mettre le pdf en annexe
+
+\footnotetext{\textit{Integrated Development Environment} que l'on traduit environnement de développement intégré, est le logiciel qui permet d'écrire, tester et exécuter du code.}
+\footnotetext{Vous pouvez trouver la documentation d'un de ces processus en annexe \ref{ch:altissia-launcher-doc}.}
 
 \paragraph{}
-Je pense que centraliser ces tâches et normaliser leur utilisation au travers d'une application unique permettrait d'augmenter la qualité des tâches opérationnelles, simplifierait leur mise en oeuvre et réduirait la friction dans les processus de déploiement.
+Grégory, le directeur technique d'Altissia, m'a proposé de développé un nouvel outil qui aura pour but de remplacer complètement \textit{Altissia-launcher}.
+De la même manière que j'ai développé un module pour automatiser un processus déjà entamé par JHipster,
+je vais développer un nouvel outil qui va automatiser un processus automatisé de manière insatisfaisante par le logiciel \textit{Altissia-launcher}.
+
+\paragraph{}
+Ce travail de fin d'études aura donc pour but de remplacer un logiciel existant avec pour priorité de rationaliser les processus qu'il implémentait et de créer une interface ergonomique.
