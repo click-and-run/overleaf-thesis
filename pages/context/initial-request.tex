@@ -1,14 +1,49 @@
-\paragraph{}
-Des tâches sont actuellement effectuées par une bibliothèque de scripts \href{https://ant.apache.org/}{Apache Ant}\footnote{Apache Ant est un outil permettant de construire une application Java à partir de son code source. Une alternative plus connue est \href{https://maven.apache.org/}{Apache Maven}.}.
-Certaines sont effectuées avec des scripts codés en \href{https://www.python.org/}{Python}\footnote{Langage de programmation très populaire pour créer des scripts.}.
-Enfin d'autres sont réalisées avec le socle d'application\footnote{Socle d'application ou \textit{Framework} en anglais; ensemble cohérent de composants logiciels permettant de construire les fondations d'un logiciel\cite{wikipedia_framework_2019}.} Spring\footnote{Spring est un socle d'application Java.} Batch\footnote{Spring Batch est un composant du \textit{Framework} Spring permettant un traitement par lots de grande quantité de données.}.
+\section{La demande initiale}
+\label{sec:initial-request}
 
 \paragraph{}
-Malheureusement, seuls des développeurs sont capables d'utiliser ces outils.
-En effet, ils ne disposent pas d'interface graphique ou de connexion avec des programmes classiques\footnote{Il est existe une connexion entre certains modules Apache Ant et Excel mais c'est loin d'être ergonomique et est finalement peu utilisé.}.
-De plus, rien ne centralise ces applications, ce qui ne facilite pas non plus la vie des programmeurs.
-Ces programmes ont été écris au moment où ils étaient nécessaire sans trop de pensées vers l'architecture globale du système applicatif futur.
-Ce qui rends ces applications assez chers à maintenir et peu plaisantes à faire évoluer.
+Nos plateformes utilisent toutes sortes de contenus.
+Bien souvent, ces contenus utilisent en tout ou en parti du texte.
+Ces données textuelles doivent respecter des formats bien spécifiques afin d'être compatibles avec nos plateformes.
+
+Il aurait été idéal de créer des éditeurs spécialement conçus pour nos applications.
+Toutefois, afin de satisfaire nos clients dans les temps impartis par les contrats, nous avons du faire le choix d'utiliser des outils d'édition générique et dans la plupart des cas, nous utilisons Excel.
+
+Excel ne permet pas d'implémenter toutes les règles que nos données doivent respecter.
+En effet, certaines de nos règles métiers imposent de consulter nos bases de données MySQL\fnmark ou encore nos APIs\fnmark.
+Il est donc nécessaire d'implémenter l'authentification imposée par nos serveurs avec du code.
+
+Microsoft a conçu le langage de programmation VBA (Visual Basic for Applications) pour étendre les capacités d'Excel\cite{o365devx_pris_nodate}.
+Nous avons rapidement écarté cette option car aucun de \textbf{nos développeur} ne maîtrise ce langage et il n'apporte que peu d'avantage comparé à d'autres langages que nous maîtrisons déjà.
+
+\fntext{MySQL est un système de gestion de bases de données relationnelles\cite{wikipedia_mysql_2018} parmi les plus populaire au monde\cite{solid_db-engines_2019}.}
+\fntext{\textit{Application Programming Interface}, que l'on traduit interface de programmation applicative, est un ensemble normalisé de classes, de méthodes ou de fonctions qui sert de façade par laquelle un logiciel offre des services à d'autres logiciels\cite{wikipedia_interface_2019}.}
 
 \paragraph{}
-Le but principal du nouveau logiciel est de centraliser tous ces processus, fournir un cadre les rendant plus facile à développer et à faire évoluer et permettant leur utilisation au travers d'une interface graphique par un acteur métier.
+Altissia launcher est un projet Apache Ant\fnmark et constitue dans notre cas une bibliothèque de scripts.
+Son principal rôle est la validation, la manipulation et l'import de données stockées dans des fichiers Excel.
+Nous avons aussi implémenté des tâches similaires avec des scripts codés en Python\fnmark ou en Java avec le socle d'application\fnmark Spring\fnmark Batch\fnmark.
+
+\fntext{Apache Ant est un outil permettant de construire une application Java à partir de son code source. Une alternative plus connue est \href{https://maven.apache.org/}{Apache Maven}.}
+\fntext{Python est un langage de programmation très populaire pour créer des scripts.}
+\fntext{Socle d'application ou \textit{Framework} en anglais; ensemble cohérent de composants logiciels permettant de construire les fondations d'un logiciel\cite{wikipedia_framework_2019}.}
+\fntext{Spring est un socle d'application Java.}
+\fntext{Spring Batch est un composant du \textit{Framework} Spring permettant un traitement par lots de grande quantité de données.}
+
+\paragraph{}
+Ces différents outils n'ont pas d'\textbf{interface graphique} propre et nous n'en avons développé aucune.
+Pour le moment, lorsqu'un acteur métier a besoin d'un de ces scripts, il doit demander l'aide d'un développeur.
+
+\paragraph{}
+Les fichiers Excel sont stockés sur un NAS\fnmark et travaillés par de multiples personnes.
+Les règles qui régissent ces fichiers peuvent changer lorsque l'on se rend compte qu'elles permettent l'insertion de données inutilisables par les applications qui vont les consommer ou tout simplement lorsque notre contenu de cours évolue.
+Il est donc important que chacun valide son travail avec la \textbf{dernière version} des règles de validation.
+
+\fntext{\textit{Network Attached Storage}, que l'on traduit serveur de stockage en réseau, permet le stockage de données en un volume centralisé pour des clients réseau hétérogènes\cite{wikipedia_serveur_2018}.}
+
+\paragraph{}
+La demande initiale est de reprendre et centraliser la validation des données effectuées par d'autres logiciels dans une application web.
+
+Cette application web devra utiliser les mêmes technologies que les autres sites utilisés par l'entreprise. A savoir que les sites webs développés par Altissia utilisent le socle d'application Spring Boot pour la partie serveur et le \textit{framework} Angular pour la partie client\fnmark.
+
+\fntext{Souvent, les sites webs sont organisés en deux parties: la partie cliente que l'on télécharge en se rendant sur le site, elle affiche les pages webs et la partie serveur qui nous transmets les données que l'on insère dans les pages.}

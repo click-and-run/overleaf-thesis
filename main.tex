@@ -15,6 +15,12 @@
 \usepackage{appendix} % manage annexe numbering
 \usepackage{pdfpages} % to insert pdf
 
+% custom handling of footnotes so I don't have to put them inline or manager counting myself
+\newcounter{footnoteMarkCount}
+\newcounter{footnoteTextCount}
+\newcommand{\fnmark}{\stepcounter{footnoteMarkCount}\setcounter{footnote}{\value{footnoteMarkCount}}\addtocounter{footnote}{-1}\footnotemark}
+\newcommand{\fntext}[1]{\stepcounter{footnoteTextCount}\setcounter{footnote}{\value{footnoteTextCount}}\footnotetext{#1}}
+
 \begin{document}
     \input{pages/titlepage} % title page occupies first page
     \input{pages/empty-page.tex} % title page must be followed by an ampty page
@@ -73,7 +79,7 @@
 
 		TODO
 		
-	\input{pages/annexe.tex}
+	\input{pages/appendix.tex}
 
 	\printbibliography
 
