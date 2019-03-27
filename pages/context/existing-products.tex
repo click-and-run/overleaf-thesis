@@ -2,32 +2,25 @@
 \label{sec:existing-products}
 
 \paragraph{}
-Lors de la recherche d'une solution existante, nous avons concentré notre attention sur les points suivants:
-\begin{itemize}
-    \item Exécuter des programmes arbitraires
-    \item Permettre de définir les paramètres d'un programme au travers d'une interface graphique
-    \item Tenir un journal des scripts exécutés
-    \item Notifier un utilisateur de la fin de l'exécution d'une tâche
-    \item Chercher toute entité (script, exécution, résultat, utilisateur, etc.)
-    \item La courbe d'apprentissage de l'outil
-\end{itemize}
-Il existe de nombreux outils sur le marché mais malheureusement, ils sont tous destinés à des développeurs...
-Les plus connus sont Ansible, Rundeck, Salt, Chef et Fabric.
-
-\subsection{Ansible}
-
-\subsection{Rundeck}
-Nous avons identifié Rundeck comme étant l'offre la plus proche de nos besoins.
-Toutefois, l'outil cible plutôt des techniciens et reste relativement complexe à utiliser.
-C'est d'ailleurs un outil que nous nos développeurs utilisent déjà, principalement pour des tâches de gestion des versions du code source.
+Le coeur du projet consiste à implémenter les règles logiques qui régissent le contenu de cours et de tests d'Altissia.
+Il n'existe donc aucun produit existant qui fasse cela.
 
 \paragraph{}
-Dans notre instance de Rundeck, il existe une tâche appelée \textit{Republication}.
-Lancer cette tâche devrait être aussi simple que d'appuyer sur un bouton mais ce n'est malheureusement pas le cas.
-Il faut cliquer quatre fois pour l'exécuter et il n'y a pas de champs de recherche.
+Toutefois, il est possible de choisir de s'appuyer sur certains produits existants pour une partie des fonctionnalités.
+Il y a notamment une partie de l'application qui doit gérer l'exécution des différentes tâches, reporter leur statut, tenir un historique, etc.
+Ces responsabilités tombent sous le coup d'un planificateur de tâches.
+% Est-ce que je peux uniquement utiliser le front de Rundeck ou dois-je créer un front intermédiaire qui appelle l'API de rundeck ?
 
-De plus cette tâche peut être paramétrée, il est possible de choisir une langue à publier.
-Sauf que pour ce faire, il faut définir une variable d'environnement\footnote{variable d'environnement: variable définie au niveau du système d'exploitation permettant de partager sa valeur à différentes applications. Ici, elle permet à Rundeck, et donc l'utilisateur, de communiquer avec l'application \textit{Republication}}.
-Cette genre de technicité devrait être masqué afin de mettre l'outil dans les mains de n'importe qui.
+\paragraph{}
+Des exemples connus sont: Ansible, Rundeck, Salt, Chef et Fabric.
+Il se trouve que Altissia utilise justement Rundeck pour automatiser ses déploiements\fnmark. Il n'y a donc pas lieu d'acheter des licences pour une alternative ou de s'y former.
 
-% todo insérer la figure
+\fntext{Dans le contexte du développement informatique, le déploiement est l'acte de rendre une application disponible aux utilisateurs.}
+
+\paragraph{}
+Rundeck se présente sur sa page d'accueil\cite{rundeck_rundeck_nodate}, traduit de l'anglais:
+\begin{displayquote}
+Transformez vos procédure opérationnelles en tâches disponibles en libre service. Donnez le contrôle et la transparence aux autres en toute sécurité.
+\end{displayquote}
+Ce qui est bien le but recherché.
+Rendre disponible des processus existants et donner le contrôle aux acteurs métiers. 
