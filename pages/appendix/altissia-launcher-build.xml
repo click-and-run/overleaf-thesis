@@ -1,0 +1,24 @@
+<target name="leveltest.validate.question.excel">
+	<for list="${languages.A}" param="studyLg">
+		<sequential>
+			<leveltest.validate.question.excel lg="@{studyLg}"/>
+		</sequential>
+	</for>
+
+	<for list="${languages.B}" param="studyLg">
+		<sequential>
+			<leveltest.validate.question.excel lg="@{studyLg}"/>
+		</sequential>
+	</for>
+</target>
+
+<macrodef name="leveltest.validate.question.language.C-D.excel">
+	<attribute name="lg"/>
+	<sequential>
+		<runLauncher applyOn="${work.dir}/leveltest/@{lg}.xls" failonerror="false"
+					 scriptName="leveltest.validate.question.language.C-D.excel" preset="default"
+					 params="consignesPath=consignes_levelTest.xls" />
+		<copy file="${work.dir}/leveltest/ella-output/system.out.err.log.txt"
+			  tofile="${work.dir}/leveltest/ella-output/validation-@{lg}.txt"/>
+	</sequential>
+</macrodef>

@@ -14,6 +14,23 @@
 \usepackage{hyperref} % manage URL
 \usepackage{appendix} % manage annexe numbering
 \usepackage{pdfpages} % to insert pdf
+\usepackage{listings} % to insert programming source code
+\usepackage{color} % color for programming source code
+
+\lstset
+{ %Formatting for code in appendix
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{gray}
+}
 
 % custom handling of footnotes so I don't have to put them inline or manager counting myself
 \newcounter{footnoteMarkCount}
