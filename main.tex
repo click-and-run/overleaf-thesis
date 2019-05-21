@@ -16,6 +16,11 @@
 \usepackage{pdfpages} % to insert pdf
 \usepackage{listings} % to insert programming source code
 \usepackage{color} % color for programming source code
+\usepackage[acronym,toc]{glossaries} % to make a glossary
+
+\loadglsentries{acronyms.tex}
+\loadglsentries{glossaries.tex}
+\makeglossaries
 
 \lstset
 { %Formatting for code in appendix
@@ -58,17 +63,17 @@
 
 	% style page number with arabic numbers
 	\renewcommand{\thepage}{\arabic{page}}
+	
+	\printglossary[type=\acronymtype,title=Acronymes]
+	\printglossary[title=Glossaire]
 
-	\input{pages/introduction.tex}
+	\input{pages/1_introduction/0_introduction.tex}
 
-    \input{pages/context/context-main.tex}
+    \input{pages/2_context/0_context-main.tex}
 
-	\input{pages/specifications/specifications-main.tex}
+	\input{pages/3_specifications/0_specifications-main.tex}
 
-	\chapter{Analyse}
-	\label{ch:analysis}
-
-		TODO
+    \input{pages/4_analysis/0_analysis-main.tex}
 
 	\chapter{Réalisation}
 	\label{ch:implementation}
