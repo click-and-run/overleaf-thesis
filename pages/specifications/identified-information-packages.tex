@@ -1,36 +1,11 @@
 \section{Lots d'informations identifiés}
 \label{sec:identified-information-packages}
-    Intégrer une nouvelle application dans un écosystème de logiciels existants imposent de conserver certaines informations, d'en remplacer certaines et d'en créer de nouvelles.
+La nouvelle application est un outil qui transforme des données, mais n'utilise pas de donnée propre.
 
-\subsection{Lots d’informations existants à conserver}
-\label{ssec:existing-information-packages-to-keep}
-    L'application va essentiellement en remplacer une autre, il est donc évident que des informations doivent être conservées.
-    Le logiciel doit utiliser:
-    \begin{itemize}
-        \item Les enregistrements des utilisateurs pour pouvoir les identifier; ils présents dans la base de données du système d'authentification.
-        \item Les licences pour contrôler les droits des utilisateurs; elles sont stockées dans la base des données du service de licences.
-        \item Les fichiers Excel contenant les cours, la matière première de l'application\fnmark.
-    \end{itemize}
-    
-    % TODO Demander l'autorisation
-    \fntext{Ces données sont propriétaires et je ne peux en partager qu'un cours extrait, voir l'annexe \ref{ch:leveltest-sample}}
+Altissia a fait le choix de structurer ses fonctionnalités en microservice.
+Cela veut dire que chaque service a des responsabilités délimitées et que si un service a besoin de ressources qu'il n'a pas en interne, il appelle le service responsable.
+Les données vont transiter par la nouvelle application pour rejoindre le service pertinent.
 
-\subsection{Lots d’informations existants à remplacer}
-\label{ssec:existing-information-packages-to-replace}
-
-    Les données déployées sur les serveurs doivent être remplacées à chaque mise à jour de contenu.
-    Cette étape est cruciale car tant qu'elle n'est pas achevée, tout le travail de l'équipe linguistique est indisponible aux utilisateurs.
-
-\subsection{Lots d’informations à produire}
-\label{ssec:information-packages-to-produce}
-
-    \paragraph{}
-    Le contenu de cours produit par les linguistes doit être consommé par l'application pour fournir le contenu des plateformes.
-    
-    \paragraph{}
-    Des rapports doivent être fournis aux utilisateurs à chaque validation afin qu'ils sachent comment corriger le contenu.
-    
-    \paragraph{}
-    L'historique des exécutions des scripts doit être construites lors de l'utilisation du nouvel outil.
-    % TODO parler des sauvegardes lorsque la fonctionnalité est introduite.
-    
+Par exemple, pour l'authentification, la nouvelle application s'adressera au service dédié et en cas de succès, recevra un JWT\fnmark qui lui permettra de communiquer avec les autres APIs.
+Ceci alors même que l'application n'a pas accès à la base des données des utilisateurs.
+\fntext{\textit{Json Web Token} est un standard permettant de représenter des revendications de manière sécurisée\cite{auth0.com_jwt.io_nodate}.}

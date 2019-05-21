@@ -8,39 +8,33 @@ Ce présent travail est un argument en faveur de cette assertion et un formidabl
 
 \paragraph{}
 Je travaille à Altissia depuis deux ans.
-Je développe des nouvelles fonctionnalités, corrige des bogues et réalise différentes tâches opérationnelles.
+Je développe de nouvelles fonctionnalités, corrige des bogues et réalise différentes tâches opérationnelles.
 
 \paragraph{}
-Mon premier projet a été le développement d'un module\fnmark pour un outil appelé \href{https://www.jhipster.tech/}{JHipster}.
-Cet outil permet de créer les fondations d'un site web sur base d'une dizaine de questions.
-Il permet de gagner plusieurs jours de travail en générant le code source qui est de toute façon commun à la plupart des sites webs.
-Une fois ce code généré, le développeur reprends la main pour implémenter ce qu'il veut.
+Chez Altissia, ainsi que dans de nombreuses entreprises, je l'imagine, un tas de données sont manipulées.
+Ces données peuvent être des données des clients, des données des utilisateurs, des données métiers, etc.
+Et pour de nombreux employés, la méthode la plus simple de stocker ces données est le tableur et bien souvent, le tableur Excel.
 
-Toutefois, la manière dont JHipster établissait la relation entre le code et la base de données\fnmark ne nous convenait pas.
-Ainsi, afin d'amener l'automatisation apportée par JHipster une étape plus loin, un collègue et moi avons conçu ce module.
-
-\fntext{Les source de ce module sont libres et disponibles sur Github: \url{https://github.com/bastienmichaux/generator-jhipster-db-helper}.}
-\fntext{Je fais référence à l'ORM. C'est une partie du code qui a pour but d'abstraire la base de données afin que le développeur manipule des objets, au sens de la programmation orientée objet, plutôt que des tables et des enregistrements.}
+Malheureusement, il arrive fréquemment que ces données soient mal formattées ou invalides et ne permettent pas leur exploitation par les logiciels cibles.
+Il incombe alors au service informatique de régler ces soucis car ils ont de meilleurs connaissances du format requis et disposent des meilleurs outils pour les corriger.
 
 \paragraph{}
-A l'heure actuelle, nous utilisons un programme appelé \textit{Altissia-launcher}.
-Ce programme valide les données contenues dans des fichiers Excel, il les manipule et les transforme afin qu'elles puissent être exploitées par d'autres composants logiciels de l'infrastructure de l'entreprise.
-Aussi, il convertit et concatène des fichiers de son.
+À l'heure actuelle, nous utilisons un programme appelé \textit{Altissia-launcher}.
+Ce programme valide les données contenues dans des classeurs Excel, il les manipule et les transforme afin qu'elles puissent être exploitées par d'autres logiciels de l'entreprise.
 
 Malheureusement, cet outil est très loin d'être parfait.
-Il n'est utilisable que par un développeur car il ne dispose d'aucune interface, on l'exécute directement depuis l'IDE\fnmark.
+Il n'est utilisable que par un développeur car il ne dispose pas d'interface graphique; on l'exécute directement depuis l'IDE\fnmark.
 De plus, même pour le développeur, il est difficile d'utilisation car pour mener à bien un processus complet, il reste nécessaire d'appliquer manuellement certaines tâches.
-Il faut par exemple, déplacer ou copier des fichiers d'un endroit à l'autre, lancer plusieurs scripts dans un certains ordre, etc.
+Il faut par exemple, déplacer ou copier des fichiers d'un endroit à l'autre, lancer plusieurs scripts dans un certain ordre, etc.
 En fait, il est impératif de suivre une documentation\fnmark pas à pas sous peine de se tromper et de devoir recommencer.
-Enfin, il utilise des technologies désuètes qui le rende très difficile à maintenir ou à faire évoluer.
+Enfin, il utilise des technologies désuètes qui le rendent très difficile à maintenir ou à faire évoluer.
 
 \fntext{\textit{Integrated Development Environment} que l'on traduit environnement de développement intégré, est le logiciel qui permet d'écrire, tester et exécuter du code.}
 \fntext{Vous pouvez trouver la documentation d'un de ces processus en annexe \ref{ch:altissia-launcher-doc}.}
 
 \paragraph{}
-Grégory, le directeur technique d'Altissia, m'a proposé de développé un nouvel outil qui aura pour but de remplacer complètement \textit{Altissia-launcher}.
-De la même manière que j'ai développé un module pour automatiser un processus déjà entamé par JHipster,
-je vais développer un nouvel outil qui va automatiser un processus automatisé de manière insatisfaisante par le logiciel \textit{Altissia-launcher}.
+Grégory, le directeur technique d'Altissia, m'a proposé de développer un nouvel outil qui aura pour but de supplanter \textit{Altissia-launcher}.
 
 \paragraph{}
-Ce travail de fin d'études aura donc pour but de remplacer un logiciel existant avec pour priorité de rationaliser les processus qu'il implémentait et de créer une interface ergonomique.
+L'objectif de ce nouveau logiciel en plus de reprendre les fonctionnalités de son prédécesseur sera de proposer une interface graphique ergonomique afin qu'il puisse être utilisé par un acteur métier plutôt que par un développeur.
+En fait, plutôt que d'être une solution concrète, cela sera un cadre de travail proposant aux développeurs les outils pour pouvoir implémenter tous les cas possibles et imaginables.

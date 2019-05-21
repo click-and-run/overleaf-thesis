@@ -2,26 +2,19 @@
 \label{sec:existing-products}
 
 \paragraph{}
-Le coeur du projet consiste à implémenter les règles logiques qui régissent le contenu de cours et de tests d'Altissia.
-Il n'existe donc aucun produit existant qui fasse cela.
+Pour valider le contenu d'un fichier Excel, le premier outil auquel on a pensé est... Excel lui-même.
+La raison pour laquelle on a écarté cette solution est que les règles que nous voulons implémenter sont spécifiques à nos besoins.
+Il n'existe aucun produit qui implémente nos besoins.
+Le mieux que nous pouvons trouver est un logiciel qui nous aide à créer notre solution.
+
+Un logiciel tel qu’Excel impose le langage de programmation (VBA) et ne permet pas de réutiliser la base de code existante.
 
 \paragraph{}
-Toutefois, il est possible de choisir de s'appuyer sur certains produits existants pour une partie des fonctionnalités.
-Il y a notamment une partie de l'application qui doit gérer l'exécution des différentes tâches, reporter leur statut, tenir un historique, etc.
-Ces responsabilités tombent sous le coup d'un planificateur de tâches.
-% Est-ce que je peux uniquement utiliser le front de Rundeck ou dois-je créer un front intermédiaire qui appelle l'API de rundeck ?
+De plus, pour effectuer son travail, ce nouveau logiciel aura besoin de communiquer avec nos APIs.
 
 \paragraph{}
-Des exemples connus sont: Ansible, Rundeck, Salt, Chef et Fabric.
-Il se trouve que Altissia utilise justement Rundeck pour automatiser ses déploiements\fnmark.
-Il n'y a donc pas lieu d'acheter des licences pour une alternative ou de s'y former.
-
-\fntext{Dans le contexte du développement informatique, le déploiement est l'acte de rendre une application disponible aux utilisateurs.}
+Enfin, des librairies existantes fournissent toutes les fonctionnalités que l'on pourrait attendre d'une solution existante.
 
 \paragraph{}
-Rundeck se présente sur sa page d'accueil\cite{rundeck_rundeck_nodate}, traduit de l'anglais:
-\begin{displayquote}
-Transformez vos procédure opérationnelles en tâches disponibles en libre service. Donnez le contrôle et la transparence aux autres en toute sécurité.
-\end{displayquote}
-Ce qui est bien le but recherché.
-Rendre disponible des processus existants et donner le contrôle aux acteurs métiers. 
+Nous sommes donc arrivés à la conclusion que la meilleure solution est de développer un nouveau logiciel.
+Cela permettra d'avoir une solution flexible et parfaitement intégrée dans l'infrastructure existante.

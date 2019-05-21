@@ -7,16 +7,16 @@ Bien souvent, ces contenus utilisent en tout ou en parti du texte.
 Ces données textuelles doivent respecter des formats bien spécifiques afin d'être compatibles avec nos plateformes.
 
 Il aurait été idéal de créer des éditeurs spécialement conçus pour nos applications.
-Toutefois, afin de satisfaire nos clients dans les temps impartis par les contrats, nous avons du faire le choix d'utiliser des outils d'édition générique et dans la plupart des cas, nous utilisons Excel.
+Toutefois, afin de satisfaire nos clients dans les temps impartis par les contrats, nous avons dû faire le choix d'utiliser des outils d'édition générique et dans la plupart des cas, nous utilisons Excel.
 
 Excel ne permet pas d'implémenter toutes les règles que nos données doivent respecter.
 En effet, certaines de nos règles métiers imposent de consulter nos bases de données MySQL\fnmark ou encore nos APIs\fnmark.
 Il est donc nécessaire d'implémenter l'authentification imposée par nos serveurs avec du code.
 
 Microsoft a conçu le langage de programmation VBA (Visual Basic for Applications) pour étendre les capacités d'Excel\cite{o365devx_pris_nodate}.
-Nous avons rapidement écarté cette option car aucun de \textbf{nos développeur} ne maîtrise ce langage et il n'apporte que peu d'avantage comparé à d'autres langages que nous maîtrisons déjà.
+Nous avons rapidement écarté cette option, car aucun de \textbf{nos développeurs} ne maitrise ce langage et il n'apporte que peu d'avantages comparé à d'autres langages que nous maitrisons déjà.
 
-\fntext{MySQL est un système de gestion de bases de données relationnelles\cite{wikipedia_mysql_2018} parmi les plus populaire au monde\cite{solid_db-engines_2019}.}
+\fntext{MySQL est un système de gestion de bases de données relationnelles\cite{wikipedia_mysql_2018} parmi les plus populaires au monde\cite{solid_db-engines_2019}.}
 \fntext{\textit{Application Programming Interface}, que l'on traduit interface de programmation applicative, est un ensemble normalisé de classes, de méthodes ou de fonctions qui sert de façade par laquelle un logiciel offre des services à d'autres logiciels\cite{wikipedia_interface_2019}.}
 
 \paragraph{}
@@ -42,7 +42,7 @@ Il est donc important que chacun valide son travail avec la \textbf{dernière ve
 \fntext{\textit{Network Attached Storage}, que l'on traduit serveur de stockage en réseau, permet le stockage de données en un volume centralisé pour des clients réseau hétérogènes\cite{wikipedia_serveur_2018}.}
 
 \paragraph{}
-La demande initiale est de reprendre et centraliser la validation des données effectuées par d'autres logiciels dans une application web.
+La demande initiale est de centraliser la validation de ces données dans une application web.
 
 Cette application web devra utiliser les mêmes technologies que les autres sites utilisés par l'entreprise. A savoir que les sites webs développés par Altissia utilisent le socle d'application Spring Boot pour la partie serveur et le \textit{framework} Angular pour la partie client\fnmark.
 

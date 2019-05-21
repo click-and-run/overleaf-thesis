@@ -1,0 +1,56 @@
+\section{Perspectives d'évolution pour une version ultérieure}
+\label{sec:future-release-outlook}
+
+Du fait qu’Altissia travaille selon le cadre de travail Agile, de nombreuses fonctionnalités sont imaginées et priorisées selon les besoins du moment, l'état actuel du développement et d'autres facteurs.
+De nombreuses fonctionnalités sont donc envisageables, mais toutes ne quitteront pas le \textit{backlog}\fnmark
+\fntext{Le backlog est le document qui regroupe toutes les fonctionnalités imaginées. Elles y restent tant qu'elles ne sont pas inscrites au planning.}
+
+\subsection{Prochaines fonctionnalités}
+\label{subsec:next-features}
+
+Les prochaines fonctionnalités sont celles qui sont estimées les plus importantes et situées dans le haut de la pile.
+
+Les fonctionnalités les plus attendues sont:
+\begin{itemize}
+    \item Détection du type de classeur: Plutôt que l'utilisateur choisisse le modèle de classeur qu'il veut utiliser, il dépose son classeur et le programme détecte à quel modèle il correspond.
+    \item Téléchargement d'un modèle d'un classeur: L'utilisateur choisit un modèle de classeur et télécharge un fichier exemplaire.
+    \item Traitement par lot: L'utilisateur peut soumettre de multiples fichiers en une seule passe.
+    \item Gestion asynchrone: L'utilisateur lance une action et ne doit pas attendre la fin de celle-ci pour lancer l'action suivante.
+    \item Notification: L'utilisateur est notifié lors de la fin d'une tâche.
+\end{itemize}
+
+\paragraph{}
+Lorsqu'un utilisateur travaille avec plusieurs modèles de classeur, lui ôter la tâche de devoir choisir le bon modèle à chaque fois qu'il passe d'un fichier à un autre va lui permettre de gagner du temps.
+
+\paragraph{}
+Habituellement, l'utilisateur arrive sur l'application avec des fichiers existants. Toutefois, afin d'accommoder plus facilement les nouveaux utilisateurs, leur permettre d'obtenir des modèles sur l'application plutôt que dans les dossiers partagés ou en demandant à un collègue permettra de réduire les risques d'erreur et le travail de recherche.
+
+\paragraph{}
+Certains cas d'utilisation nécessitent de stocker les informations dans de multiples fichiers pour le même modèle.
+C'est par exemple le cas pour certains modèles de classeur ou chaque fichier ne contient les données que pour une langue.
+Il y a donc un classeur par langue.
+Certaines linguistes travaillent parfois sur plusieurs langues en même temps.
+La soumission multiple permettra un gain de temps.
+
+\paragraph{}
+La gestion asynchrone permettra de rendre le contrôle à l'utilisateur lors du traitement de fichiers volumineux ou dont les données sont lentes à traiter.
+En effet, certains fichiers contiennent plusieurs dizaines de milliers de lignes.
+D'autres fichiers sont lents à traiter à cause des nombreux appels aux réseaux.
+
+\paragraph{}
+Du fait de la gestion asynchrone, il est nécessaire de pouvoir notifier un utilisateur de la fin d'une tâche afin qu'il n'ait pas besoin de visiter fréquemment la page des résultats.
+
+\subsection{Pré-requis techniques}
+\label{subsec:nex-version-technical-requirements}
+
+\paragraph{}
+La détection du type de classeur, le téléchargement d'un modèle et le traitement par lot peuvent être ajoutés avec les technologies déjà intégrées.
+
+Par contre, la gestion asynchrone et les notifications nécessitent l'introduction d'une nouvelle technologie.
+L'outil qui remplit ce cas d'utilisation est appelé un agent de messages.
+Altissia utilise déjà une telle technologie dans d'autres situations et je compte donc utiliser la même solution : \textit{RabbitMQ}.
+
+\paragraph{}
+Un agent de message est un logiciel qui stocke des messages dans des fils et les conserve jusqu'à ce qu'ils soient consommés.
+Ainsi, le serveur enverra le résultat de son travail à l'agent de message plutôt que directement à l'utilisateur.
+Ceci, car ce logiciel est capable de conserver le message et le délivrer quand l'utilisateur est prêt à le recevoir.

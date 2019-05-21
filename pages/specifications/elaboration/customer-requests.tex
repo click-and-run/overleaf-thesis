@@ -1,23 +1,41 @@
 \subsection{Les demandes clients}
 \label{subsec:customer-requests}
 
-    Voici les différentes fonctionnalités sorties au cours l'élaboration du cahier des charges:
+Voici les différentes fonctionnalités établies au cours l'élaboration du cahier des charges:
+\begin{enumerate}
+    \item Valider de fichiers Excel:
     \begin{enumerate}
-        \item Valider de fichiers Excels:
-        \begin{enumerate}
-            \item Présence des entêtes
-            \item Ignorer les colonnes superflues
-            \item Respect d'un format prédéfini
-            \item Membre d'un ensemble de choix
-            \item Unicité d'une valeur dans la feuille
-            \item Valeur inutilisée dans une base de données
-            \item Valider la valeur d'une colonne en fonction de la valeur d'une autre colonne
-        \end{enumerate}
-        \item Contrôler l'application depuis une interface web:
-        \begin{enumerate}
-            \item Lancer la validation
-            \item Visualiser le résultat d'une exécution
-            \item Visualiser l'historique des exécutions
-            \item Être notifié de la complétion d'une tâche
-        \end{enumerate}
+        \item Présence des feuilles
+        \item Présence des entêtes
+        \item Ignorer les entêtes superflus
+        \item Le respect d'un modèle de chaine de caractères (expression régulière\fnmark).
+        \item La position d'une valeur numérique par rapport à une borne inférieure
+        \item La position d'une valeur numérique par rapport à une borne supérieure
+        \item L'inclusion d'une valeur numérique entre deux bornes
+        \item Le résultat de l'évaluation d'une fonction\fnmark booléenne arbitraire
+        \item La taille d'une chaine de caractères
+        \item L'appartenance d'une valeur à un ensemble fini
+        \item La contrainte de référence\fnmark entre deux feuilles du même classeur
+        \item La contrainte de référence dans une base de données
+        \item La contrainte de référence dans un API externe
+        \item L'unicité d'une valeur au sein de sa colonne
+        \item L'unicité d'une combinaison de valeurs au sein de sa feuille
+        \item Validation d'une cellule en fonction de la valeur d'une autre cellule
+        \item La nullité\fnmark d'une valeur
+        \item Le respect du format des \textit{mails}
     \end{enumerate}
+    \item Contrôler l'application depuis une interface web:
+    \begin{enumerate}
+        \item Soumettre un fichier pour validation
+        \item Visualiser la validation
+        \item Soumettre un fichier pour exécution
+        \item Visualiser le résultat de l'exécution
+        \item Visualiser l'historique des exécutions
+        \item Être notifié de la complétion d'une validation ou exécution
+    \end{enumerate}
+\end{enumerate}
+    
+\fntext{Une expression régulière est une chaine de caractères, qui décrit, selon une syntaxe précise, un ensemble de chaines de caractères possibles\cite{noauthor_expression_2019}.}
+\fntext{Il est question ici d'une fonction informatique, en l'occurrence, elle transforme une valeur de son domaine de définition en une réponse vraie ou faux. Une même entrée donne toujours la même sortie.}
+\fntext{Une contrainte de référence signifie qu'une valeur doit exister dans le référentiel. Par exemple, mon nom de famille doit être porté par l'un de mes parents pour que je puisse le porter.}
+\fntext{En informatique, la nullité indique l'absence de valeur.}
