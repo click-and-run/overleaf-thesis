@@ -1,0 +1,18 @@
+\subsection{L'internalisation}
+\label{subsec:i18n}
+
+\paragraph{}
+Chaque valeur textuelle statique\fnmark{} doit être traduite. Seuls des employés d'Altissia auront accès à cette application, il n'est donc pas nécessaire de traduire l'application dans toutes les langues supportées par les autres application d'Altissia\fnmark{}.
+\fntext{Toutes données qui ne viennent pas d'une base de données sont dites statiques car elles ne peuvent pas changer pendant la vie de l'application.}
+\fntext{Ce qui aurait fait une trentaine de langue dont je n'en connais que trois...}
+
+Il est par contre obligatoire d'être compatible avec le système de localisation qui est déjà mis en place.
+
+Altissia embarque les mécanismes nécessaires à la localisation dans chaque application. Une application peut donc changer de langue sans contacter de \gls{g-server}.
+
+De plus, les informations de localisations sont stockées sur l'application web PhraseApp.
+Les localisations devront donc être téléchargées depuis cette dernière.
+Le format privilégié pour les applications clientes est le format \gls{a-json}, que l'application devra donc utiliser.
+
+\paragraph{}
+L'application cliente devra donc implémenter la localisation seule. C'est le sujet qui est abordé dans la sous section \ref{subsec:i18n-imp}
