@@ -28,10 +28,19 @@ Pour comprendre comment c'est possible, il faut d'abord s'intéresser à la mani
 \end{figure}
 
 \paragraph{}
-Un \gls{g-client} qui veut s'authentifier fait sa demande à la passerelle. La passerelle consulte le service des utilisateurs et si l'identifiant et le mot de passe concordent, elle approuve l'authentification. Elle envoie alors un \gls{a-jwt}, dont on peut observer un exemplaire sur la figure \ref{fig:jwt-good} qui est une sorte de passeport qui déclare l'identité et les droits de l'utilisateur. Ce \gls{a-jwt} est lisible par tous et est infalsifiable. Son contenu est accompagné d'une signature qui est la résultat de ce même contenu passé par une \gls{g-hash-func}. La seule manière de reproduire cette signature est disposer de la \gls{g-hash-func} et du secret. La figure \ref{fig:jwt-bad} illustre ce que l'on obtient sans le bon secret. Cette formule est présente sur le \gls{a-jwt} et est donc accessible à tous. Le secret lui n'est connu que par la passerelle et il n'y a donc que elle qui peut produire cette signature.
+Un \gls{g-client} qui veut s'authentifier fait sa demande à la passerelle.
+La passerelle consulte le service des utilisateurs et si l'identifiant et le mot de passe concordent, elle approuve l'authentification.
+Elle envoie alors un \gls{a-jwt}, dont on peut observer un exemplaire sur la figure \ref{fig:jwt-good} qui est une sorte de passeport qui déclare l'identité et les droits de l'utilisateur.
+Ce \gls{a-jwt} est lisible par tous et est infalsifiable. Son contenu est accompagné d'une signature qui est la résultat de ce même contenu passé par une \gls{g-hash-func}.
+La seule manière de reproduire cette signature est disposer de la \gls{g-hash-func} et du secret.
+La figure \ref{fig:jwt-bad} illustre ce que l'on obtient sans le bon secret.
+Cette formule est présente sur le \gls{a-jwt} et est donc accessible à tous.
+Le secret lui n'est connu que par la passerelle et il n'y a donc que elle qui peut produire cette signature.
 
 \paragraph{}
-A chaque requête, un client accompagne sa demande de son \gls{a-jwt} et la passerelle reproduit la signature. Si la signature produite est la même que celle inscrite sur le \gls{a-jwt}, la passerelle transmet la demande, sinon elle la rejette. Et lorsque les \glspl{g-server} doivent communiquer entre eux pour remplir la demande du client, ils font confiance aux droits indiqués car ils ont été vérifiés par la passerelle.
+A chaque requête, un client accompagne sa demande de son \gls{a-jwt} et la passerelle reproduit la signature.
+Si la signature produite est la même que celle inscrite sur le \gls{a-jwt}, la passerelle transmet la demande, sinon elle la rejette.
+Et lorsque les \glspl{g-server} doivent communiquer entre eux pour remplir la demande du client, ils font confiance aux droits indiqués car ils ont été vérifiés par la passerelle.
 
 \paragraph{}
 Pour que cela fonctionne, la nouvelle application cliente doit:
