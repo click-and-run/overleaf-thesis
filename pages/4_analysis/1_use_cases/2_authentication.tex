@@ -32,7 +32,7 @@ Un \gls{g-client} qui veut s'authentifier fait sa demande à la passerelle.
 La passerelle consulte le service des utilisateurs et si l'identifiant et le mot de passe concordent, elle approuve l'authentification.
 Elle envoie alors un \gls{a-jwt}, dont on peut observer un exemplaire sur la figure \ref{fig:jwt-good} qui est une sorte de passeport qui déclare l'identité et les droits de l'utilisateur.
 Ce \gls{a-jwt} est lisible par tous et est infalsifiable. Son contenu est accompagné d'une signature qui est le résultat de ce même contenu passé par une \gls{g-hash-func}.
-La seule manière de reproduire cette signature est disposer de la \gls{g-hash-func} et du secret.
+La seule manière de reproduire cette signature est de disposer de la \gls{g-hash-func} et du secret.
 La figure \ref{fig:jwt-bad} illustre ce que l'on obtient sans le bon secret.
 Cette formule est présente sur le \gls{a-jwt} et est donc accessible à tous.
 Le secret lui n'est connu que par la passerelle et il n'y a donc qu'elle qui peut produire cette signature.

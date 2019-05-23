@@ -1,0 +1,89 @@
+\section{L'architecture mise en place}
+\label{sec:architecture}
+
+\paragraph{}
+La création d'un site web est une tâche complexe et il convient de mettre en place des outils robustes et éprouvés plutôt que de tout créer de zéro.
+Il est aussi primordial de structurer les différents composants de l'application de manière intelligente de manière à obtenir un tout cohérent, maintenable et extensible.
+Sachant que Altissia gère une quarantaine de services différents, il est impératif que toutes ces applications aient une structure similaire, si ce n'est pas exactement la même.
+C'est dans cette optique que j'ai repris bon nombre des technologies employées par mon équipe.
+
+\paragraph{}
+Nous utilisons un générateur de code appelé \gls{g-jhipster}.
+C'est un projet open-source auquel j'ai eu la joie de contribuer au travers d'un module permettant de personnaliser l'\gls{a-orm} générée\cite{noauthor_generator-jhipster-db-helper_nodate}.
+Il s'utilise une unique fois au début de chaque projet et il écrit les fondements de la future application.
+Je l'ai donc utilisé pour générer l'application de l'interface utilisateur et l'application du \gls{g-server}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/diagrams/gw-archi-detailed.png}
+    \caption{Une vue détaillée de l'architecture de l'application Click-and-Run}
+    \label{fig:detailed-archi}
+\end{figure}
+
+\paragraph{}
+La figure \ref{fig:gw-archi} donne un aperçu d'une telle structure.
+Voyons avec l'illustration \ref{fig:detailed-archi} sa version détaillée. Je n'y ai inclus que les éléments développés par mes soins et aie omis les éléments externes avec lesquels l'application Click-and-Run interagit.
+
+Détaillons d'abord les noeuds de ce schéma:
+\begin{itemize}
+    \item \textit{Actor} est l'utilisateur final qui navigue sur nos pages web
+    \item Nginx est un \gls{g-server} de fichiers, il sert les fichiers qui lui sont demandés
+    \item Tomcat est un serveur applicatif \gls{g-java}, il exécute des applications \gls{g-java} et celles-ci peuvent répondre aux appels qu'on leur fait
+    \item \textit{frontend} est l'application Angular qui constitue l'interface que l'utilisateur utilise
+    \item \gls{g-mysql} est une base de données
+    \item \textit{gateway} est une application \gls{g-spring} qui autorise les demandes et les diriges vers le service demandé
+    \item \textit{registry} est une application \gls{g-spring} qui indique où se trouve les services et vérifie leur disponibilité
+    \item REST API est une application \gls{g-spring} qui sert des ressources et réponds aux requêtes qu'on lui fait
+\end{itemize}
+Les flèches indiquent le sens des demandes, le noeud de côté de la queue fait la demande et celui du côté de la pointe répond.
+Lorsqu'un verbe est présent sur un lien, le noeud sujet est celui en extrémité du schéma tandis le noeud à l'autre extrémité est le complément d'objet direct.
+
+\paragraph{}
+Intéressons nous d'abord à l'application \gls{g-angular}.
+Elle est servie par le \gls{g-server} Nginx.
+C'est un \gls{g-server} de fichiers, il n'a pas connaissance leur utilité.
+C'est le navigateur internet de l'utilisateur qui interprète les instructions du code contenu dans les fichiers.
+Tous les fichiers ne sont pas servis en une seule fois, cela ne serait pas idéal.
+Seuls les fichiers nécessaires à afficher la page demandée sont données.
+Lorsque l'utilisateur navigue dans l'application, cette dernière fera les demandes des fichiers nécessaires à son bon fonctionnement.
+
+\paragraph{}
+Peu importe le service que l'application cliente demande, elle doit passée par la passerelle (\textit{gateway} en anglais).
+
+Comme pour chacune des applications \gls{g-java}, un \gls{g-server} Tomcat a la fonction de la faire tourner.
+Tomcat est conçu pour exécuter du code \gls{g-java} et écouter les ports réseaux de la machine sur laquelle il est installé pour les diriger vers l'application qu'il sert\cite{noauthor_apache_nodate}.
+
+Celle-ci va tout d'abord s'occuper de vérifier la validité du \gls{a-jwt} transmis avec l'appel (l'authentification est traité en sous-section \ref{subsec:auth-feature}) et ensuite transmettre la demande.
+Elle consulte la base de données des utilisateurs pour comparer l'identifiant et le mot de passe lors de l'authentification.
+J'ai implémenté un lien direct entre la passerelle et la base de données dans l'application de démonstration mais dans le cas réel de l'infrastructure logicielle d'Altissia, une passerelle existe déjà et elle s'adresse à un service dédié pour quérir les informations des utilisateurs.
+Elle a besoin de travailler de pair avec le registre (\textit{registry} en anglais) pour accomplir son travail.
+
+\paragraph{}
+Le registre est une application qui tient à jour un carnet d'adresse des différents services.
+Elle se base sur le projet Eureka de Netflix\cite{noauthor_aws_2019} pour gérer la découverte des services.
+Lorsqu'un service démarre, il renseigne qu'il est prêt à accomplir son devoir au registre.
+Le registre va alors contacter fréquemment tous les services ouverts pour s'assurer de leur disponibilité.
+
+En plus de cette tâche, elle configure les services et prend soin de leur évolutivité.
+Un service sera donc configuré selon le registre qui est présent sur l'environnement où il est déployé.
+L'évolutivité consiste à adapter les ressources allouées au service en fonction de la charge de travail qu'il endure.
+C'est aussi elle qui effectue les mesures présentes dans les pages d'administration (voir sous-section \ref{subsec:admin-pages}).
+
+\paragraph{}
+L'\gls{a-api} est le composant qui contient la logique métier.
+C'est lui qui s'occupe de la validation et le traitement des classeurs Excel.
+Il consulte sa base de données lors de la validation et y insère des données lors du traitement.
+Selon l'utilisation qui sera fait de Click-and-Run, cette base de données sera remplacée par des appels à des services externes ou une combinaison des deux.
+Altissia a fait le choix de structure ses logiciels en microservices où chaque élément a une responsabilité très précise et il ne fait donc pas sens que Click-and-Run gère des ressources métiers en plus de la logique de validation et traitement pour lequel il a été conçu.
+
+Comme on le voit dans la sous-section \ref{subsec:rest-swagger-api}, la différence entre utiliser un service ou une base de données est minime et passer de l'un à l'autre est trivial.
+
+\paragraph{}
+L'interface utilisateur et la passerelle sont développées dans le répertoire de code \href{https://github.com/click-and-run/click-and-run-gw}{click-and-run-gw}\fnmark{} tandis que l'\gls{a-api} et le registre le sont dans le répertoire \href{https://github.com/click-and-run/click-and-run}{click-and-run}\fnmark{}.
+\fntext{click-and-run-gw: https://github.com/click-and-run/click-and-run-gw}
+\fntext{click-and-run: https://github.com/click-and-run/click-and-run}
+
+\input{pages/4_analysis/4_architecture/1_spring.tex}
+\input{pages/4_analysis/4_architecture/2_angular.tex}
+\input{pages/4_analysis/4_architecture/3_swagger.tex}
+\input{pages/4_analysis/4_architecture/4_data_jpa.tex}

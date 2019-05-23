@@ -10,18 +10,17 @@ Il aurait été idéal de créer des éditeurs spécialement conçus pour nos ap
 Toutefois, afin de satisfaire nos clients dans les temps impartis par les contrats, nous avons dû faire le choix d'utiliser des outils d'édition générique et dans la plupart des cas, nous utilisons Excel.
 
 Excel ne permet pas d'implémenter toutes les règles que nos données doivent respecter.
-En effet, certaines de nos règles métiers imposent de consulter nos bases de données \gls{g-mysql} ou encore nos \gls{a-api}.
+En effet, certaines de nos règles métiers imposent de consulter nos bases de données \gls{g-mysql} ou encore nos \textit{\gls{a-api}}.
 Il est donc nécessaire d'implémenter l'authentification imposée par nos serveurs avec du code.
 
 Microsoft a conçu le langage de programmation \gls{a-vba} pour étendre les capacités d'Excel\cite{o365devx_pris_nodate}.
-Nous avons rapidement écarté cette option, car aucun de \textbf{nos développeurs} ne maitrise ce langage et il n'apporte que peu d'avantages comparés à d'autres langages que nous maitrisons déjà.
+Nous avons rapidement écarté cette option, car aucun de nos développeurs ne maitrise ce langage et il n'apporte que peu d'avantages comparés à d'autres langages que nous maitrisons déjà.
 
 \paragraph{}
 Altissia launcher est un projet Apache Ant\fnmark{} et constitue dans notre cas une bibliothèque de scripts.
+\fntext{Apache Ant est un outil permettant de construire une application \gls{g-java} à partir de son code source. Une alternative plus connue est \href{https://maven.apache.org/}{Apache Maven}.}
 Son principal rôle est la validation, la manipulation et l'import de données stockées dans des fichiers Excel.
 Nous avons aussi implémenté des tâches similaires avec des scripts codés en Python\fnmark{} ou en \gls{g-java} avec le \gls{g-framework} \Gls{g-spring} Batch\fnmark{}.
-
-\fntext{Apache Ant est un outil permettant de construire une application \gls{g-java} à partir de son code source. Une alternative plus connue est \href{https://maven.apache.org/}{Apache Maven}.}
 \fntext{Python est un langage de programmation très populaire pour créer des scripts.}
 \fntext{\Gls{g-spring} Batch est un composant du \textit{Framework} Spring permettant un traitement par lots de grandes quantités de données.}
 
@@ -30,13 +29,11 @@ Ces différents outils n'ont pas d'\textbf{interface graphique} propre et nous n
 Pour le moment, lorsqu'un acteur métier a besoin d'un de ces scripts, il doit demander l'aide d'un développeur.
 
 \paragraph{}
-Les fichiers Excel sont stockés sur un \gls{a-nas} et travaillés par de multiples personnes.
+Les fichiers Excel sont stockés sur un \textit{\gls{a-nas}} et travaillés par de multiples personnes.
 Les règles qui régissent ces fichiers peuvent changer lorsque l'on se rend compte qu'elles permettent l'insertion de données inutilisables par les applications qui vont les consommer ou tout simplement lorsque notre contenu de cours évolue.
 Il est donc important que chacun valide son travail avec la \textbf{dernière version} des règles de validation.
 
 \paragraph{}
 La demande initiale est de centraliser la validation de ces données dans une application web.
 
-Cette application web devra utiliser les mêmes technologies que les autres sites utilisés par l'entreprise. À savoir que les sites web développés par Altissia utilisent le socle d'application Spring Boot pour la partie serveur et le \textit{framework} Angular pour la partie client\fnmark{}.
-
-\fntext{Souvent, les sites web sont organisés en deux parties: la partie cliente que l'on télécharge en se rendant sur le site, elle affiche les pages web et la partie serveur qui nous transmet les données que l'on insère dans les pages.}
+Cette application web devra utiliser les mêmes technologies que les autres sites utilisés par l'entreprise. À savoir que les sites web développés par Altissia utilisent le socle d'application Spring Boot pour la partie serveur et le \gls{g-framework} \Gls{g-angular} pour la partie \gls{g-client}.
