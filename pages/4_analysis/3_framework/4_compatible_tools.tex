@@ -1,2 +1,22 @@
 \subsection{Les outils compatibles}
 \label{subsec:compatible-tools}
+
+\paragraph{}
+Pour valider une ligne d'un fichier Excel, j'ai choisi de procéder en deux étapes:
+\begin{itemize}
+    \item Transférer les données de la ligne sur un modèle d'objet
+    \item Valider l'objet
+\end{itemize}
+C'est une stratégie qui très usitée pour la validation de données avant de les stocker dans une base de données ou encore lors de réception de données d'un utilisateur.
+L'objet est une abstraction qui permet de représenter de manière intuitive les données sans tenir compte de l'implémentation sous-jacente du stockage utilisé.
+
+\paragraph{}
+J'ai choisi d'utiliser un format établi qui est utilisé par de nombreux outils existants sur le marché: \textit{javax.validation.constraints}.
+Ce choix permettra instantanément de disposer de centaines de règles déjà écrites et utilisées dans l'industrie.
+
+Dans l'extrait de code suivant, on peut observer à quoi ressemble un modèle et observer quelques annotations.
+\lstinputlisting[language=java, firstnumber=14, firstline=14, lastline=37]{pages/appendix/code/RegistrantRow.java}
+Les annotations \lstinline{@NotNull} et \lstinline{@Pattern} sont directement définies par la librairie \textit{javax.validation.constraints}.
+Les annotations \lstinline{@Email} et \lstinline{@Length} viennent de l'\gls{a-orm} \Gls{g-hibernate}.
+L'annotation \lstinline{@InterfaceLanguage} a été créée par mes soins.
+Les autres annotations ne servent pas à valider les données mais à faire le lien entre la ligne dans le fichier Excel et le modèle d'objet.
