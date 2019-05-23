@@ -1,3 +1,23 @@
 \subsection{Les pages de l'administrateur}
 \label{subsec:admin-pages}
-TODO
+
+\paragraph{}
+L'\textbf{administrateur} a accès à toute une panoplie d'outils.
+Ces pages sont accessibles par un menu qui n'est visible que pour l'\textbf{administrateur}.
+
+Les éléments suivants doivent être présents:
+\begin{itemize}
+    \item Gateway: Liste les API disponibles
+    \item Gestion des utilisateurs: \acrshort{a-crud} sur les listes des \textbf{utilisateurs}
+    \item Métriques: Mesures de l'utilisation des ressources de la machine physique sur laquelle est installée l'application
+    \item Diagnostics: Liste des services composants l'application et leur état de fonctionnement
+    \item Configuration: Liste des propriétés configurables du serveur et leur valeur
+    \item Audits: Liste des appels sur les ressources surveillées (ex.: tentative de connexion)
+    \item \Glspl{g-log}: Contrôle des niveaux de verbosité des agents de journaux du \gls{g-server}
+    \item \gls{a-api}: Liste des ressources exposées par le \gls{g-server} avec exemples d'utilisation
+    \item Base de données: Lien vers l'application d'accès à la base de données (ex.: \gls{g-pma})
+\end{itemize}
+
+Ces pages doivent correspondre exactement à celles fournies par le générateur de code \Gls{g-jhipster}.
+Cet outil est utilisé par Altissia et permet de gagner plusieurs de développements lors de la création de nouveaux projets.
+Il génère le code qui constitue le squelette d'un site web et le développeur se l'approprie pour ajouter de nouvelles fonctionnalités par dessus.

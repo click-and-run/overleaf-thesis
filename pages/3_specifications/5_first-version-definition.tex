@@ -1,7 +1,7 @@
 \section{Définition de la première version de l'application}
 \label{sec:first-version-definition}
 
-Les besoins sont nombreux mais il est nécessaire de s'arrêter sur un périmètre défini pour une première version.
+Les besoins sont nombreux, mais il est nécessaire de s'arrêter sur un périmètre défini pour une première version.
 Cela permettra d'obtenir un retour d'information sur les choix pris et de s'adapter aux besoins.
 
 \subsection{Besoins métiers}
@@ -21,26 +21,22 @@ Ces éléments de structure sont les suivants:
 \end{itemize}
 
 Ces structures comportent toutes sortes d'attributs dont les valeurs doivent respecter leur domaine de définition.
-Ces attributs sont par exemples: des titres, des identifiants, des niveaux de difficulté, des thèmes (job, vacances, vie quotidienne, etc.) ou encore des sujets d'apprentissages (prononciation, grammaire, etc.).
+Ces attributs sont par exemple: des titres, des identifiants, des niveaux de difficulté, des thèmes (job, vacances, vie quotidienne, etc.) ou encore des sujets d'apprentissages (prononciation, grammaire, etc.).
 
 \paragraph{}
-Par exemple, les identifiants externes\fnmark des exercices doivent être constitués du code de la langue, du niveau de difficulté, du type de leçon, du titre de la leçon, du type d'activité et du titre de l'activité.
-Le code de la langue est au format de la norme \textit{RFC 4647}\cite{davis_matching_nodate} (4 lettres séparées par un trait d'union ou un trait de soulignement).
-\fntext{Externes, car ils sont utilisés par les autres APIs et pas en interne par l'\textit{API} qui les définit.}
+Par exemple, parmi les attributs, il y a le code de la langue qui doit être au format de la norme \textit{RFC 4647}\cite{davis_matching_nodate} (4 lettres séparées par un trait d'union ou un trait de soulignement).
 Le niveau de difficulté est un élément de la liste du cadre européen commun de référence pour les langues\cite{noauthor_cadre_nodate}: A1, A2, B1, B2, C1 et C2.
 Le type de la leçon est un mot parmi une liste finie.
 Le titre de la leçon est une suite de mots arbitraires.
 Le type de l'activité est un mot parmi une liste finie.
 Le titre de l'activité est une suite de mots.
 
-De plus, toutes les lettres sont majuscules, les caractères spéciaux ou d'accentuation sont exclus et les mots sont reliés par des traits de soulignements.
 Chaque attribut apporte ses propres contraintes.
 
 \paragraph{}
 Il en résulte que pour la première version, il est nécessaire de pouvoir évaluer:
 \begin{itemize}
-    \item Le respect d'un modèle de chaine de caractères (expression régulière\fnmark).
-    \fntext{Une expression régulière est une chaine de caractères, qui décrit, selon une syntaxe précise, un ensemble de chaines de caractères possibles\cite{noauthor_expression_2019}}.
+    \item Le respect d'un modèle de chaine de caractères (une \gls{g-regex}).
     \item La position d'une valeur numérique par rapport à une borne inférieure
     \item La position d'une valeur numérique par rapport à une borne supérieure
     \item L'inclusion d'une valeur numérique entre deux bornes
@@ -65,7 +61,7 @@ Il en résulte que pour la première version, il est nécessaire de pouvoir éva
 
 \paragraph{}
 Afin d'avoir une gestion centrale de l'application et de s'assurer que la dernière version est toujours utilisée, nous avons fait le choix d'implémenter la solution sous la forme d'un site web.
-Ce choix était particulièrement évident car c'est le coeur de métier d'Altissia et que l'entreprise dispose de très bonnes compétences en la matière.
+Ce choix était particulièrement évident, car c'est le coeur de métier d'Altissia et que l'entreprise dispose de très bonnes compétences en la matière.
 
 \paragraph{}
 Ce site web sera composé d'un serveur et d'une application cliente.
@@ -74,7 +70,7 @@ L'application cliente présente les informations de manière visuelle et compré
 
 \paragraph{}
 Ce site web devra répondre aux impératifs de qualité et de sécurité d'Altissia.
-Cela inclue l'utilisation du système d'authentification existant, l'utilisation du système de licences\fnmark pour gérer les droits des utilisateurs, système de surveillance de la santé du serveur ainsi que les outils d'administrations habituels. % TODO maybe put some examples or ref to detailed list
-\fntext{Un utilisateur peut avoir plusieurs licences. Chaque service peut exiger certains licences pour certaines fonctionnalités. Par exemple, l'administration des utilisateurs requière les droits d'administrateurs.}
+Cela inclut l'utilisation du système d'authentification existant, l'utilisation du système de licences\fnmark pour gérer les droits des utilisateurs, système de surveillance de la santé du serveur ainsi que les outils d'administration habituels. % TODO maybe put some examples or ref to detailed list
+\fntext{Un utilisateur peut avoir plusieurs licences. Chaque service peut exiger certaines licences pour certaines fonctionnalités. Par exemple, l'administration des utilisateurs requiert les droits d'administrateur.}
 De plus, sur le plan technique, cela impose d'utiliser la même structure et les mêmes technologies que les applications existantes.
 Ces technologies sont détaillées dans le chapitre \ref{ch:analysis}.
