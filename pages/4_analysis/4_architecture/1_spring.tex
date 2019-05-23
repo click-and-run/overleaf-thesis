@@ -1,4 +1,148 @@
 \subsection{Le serveur avec Spring}
 \label{subsec:server-spring}
 
-Le \gls{g-server}
+\paragraph{}
+Le \gls{g-server} est implémenté en utilisant le socle d'application \Gls{g-spring} Boot.
+C'est une version de \gls{g-spring} où des choix dogmatiques ont été faits sur la manière dont \gls{g-spring} doit être configuré afin de réduire le travail nécessaire à avoir un \gls{g-server} prêt l'emploi.
+\Gls{g-spring} est un projet absolument immense et simplifie la vie du développeur dans nombreux contextes.
+Je vais me concentrer ici sur quatre aspects:
+\begin{itemize}
+    \item La base de données
+    \item Le réseau
+    \item La sécurité
+    \item L'injection de dépendance
+\end{itemize}
+
+\subsubsection{La base de données}
+\label{subsubsec:spring-data-jpa}
+
+\paragraph{}
+Son composant \gls{g-spring} Data \acrshort{a-jpa}, qui est bati par-dessus le projet \gls{g-hibernate}, gère la connexion a la base de données, la représentation des données sous forme d'objet ainsi que la persistance des données.
+
+Ainsi un développeur n'a plus besoin d'écrire la moindre requête \gls{a-sql}.
+Il utilise les fonctions fournies par \gls{g-spring} Data \acrshort{a-jpa}.
+
+On peut par exemple voir ci-dessous la classe qui représente le répertoire dans lequel sont stockée les entitées des apprenants:
+\begin{lstlisting}[language=Java]
+@Repository
+public interface LearnerRepository extends JpaRepository<Learner,Long> {
+    List<Learner> findAllByLoginIn(Collection<String> loginList);
+}
+\end{lstlisting}
+La méthode \lstinline{findAllByLoginIn} n'est pas prévue de base mais est construire en utilisant les outils fournis par le \gls{g-framework}.
+
+L'appel \lstinline{learnerRepository.save(learners);} utilise une fonction prévue pour sauvegarder plusieurs apprenants en base de données.
+A partir de là, \gls{g-spring} Data \acrshort{a-jpa} s'occupe de créer la requête \gls{a-sql} correspondant.
+
+\subsubsection{Le réseau}
+\label{subsubsec:spring-web}
+
+\paragraph{}
+Le composant \Gls{g-spring} Web est sûrement le plus utilisé de \gls{g-spring}.
+Il permet de transformer les données reçus par le réseau en objet défini par le code java.
+En cas de tout écart au scénario nominal, il s'occupe de répondre avec le bon code d'erreur à l'appelant.
+Il va par exemple répondre "404 \textit{Not Found}" lorsque la ressource recherché n'existe pas ou encore "500 \textit{Internal Server Error}" lorsque l'application plante et n'est plus capable de formuler une réponse correcte.
+
+\paragraph{}
+Voici par exemple une ressource définie par l'\gls{a-api} de Click-and-Run\fnmark{}:
+\fntext{J'ai caché certains détails d'implémentation pour simplifier.}
+\begin{lstlisting}[language=Java]
+@Timed
+@PostMapping(value = "/api/registration/validate", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public ResponseEntity<Workbook> validateFile(@RequestParam(name = "file") MultipartFile file) {
+    log.debug("REST request to /registration/validate with {}", file.getOriginalFilename());
+
+    Workbook workbook = workbookExtendedService.validateWorkbook(file, new RegistrationWorkbook());
+
+    return ResponseEntity.ok(workbook);
+}
+\end{lstlisting}
+Ce code ne contient que très peu de logique et fait surtout appel aux fonctionnalités de \Gls{g-spring} Web. Il indique à quelle URL la ressource doit répondre, avec quel verbe \gls{a-http}, avec quel paramètre et avec quelle réponse.
+
+\subsubsection{La sécurité}
+\label{spring-boot-starter-security}
+
+\paragraph{}
+Le composant \gls{g-spring} Security s'occupe de fournir des mécanismes de sécurité pour protéger les différentes ressources du serveur avec un degré de granularité personnalisable.
+Il vérifie que chaque demande est légitime.
+
+Pour personnaliser ma configuration du \gls{g-server}, j'ai écris la fonction suivante dans la classe \lstinline{WebSecurityConfigurerAdapter} qui est utilisée par le \gls{g-framework} pour se configurer.
+\begin{lstlisting}[language=Java]
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http
+        .csrf()
+        .disable()
+        .headers()
+        .frameOptions()
+        .disable()
+    .and()
+        .sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    .and()
+        .authorizeRequests()
+        .antMatchers("/api/**").authenticated()
+        .antMatchers("/management/health").permitAll()
+        .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
+        .antMatchers("/swagger-resources/configuration/ui").permitAll()
+    .and()
+        .apply(securityConfigurerAdapter());
+}
+\end{lstlisting}
+Cet extrait de code désactive des options qui pourrait débouché sur des vulnérabilités si elles n'étaient pas bien utilisées\cite{noauthor_cross-site_nodate},
+active une système de cession sans état\fnmark{}, ce qui est possible grâce à l'utilisation d'une authentification par \gls{a-jwt}
+\fntext{Sans état signifie que le \gls{g-server} ne doit pas garder les connections de l'utilisateur en mémoire.}
+et enfin configure les règles d'accès selon l'URL appelée.
+
+Seul les utilisateurs authentifiés ont accès aux ressources derrière le chemin \lstinline{/api/**}.
+Cela concerne par exemple le chemin \lstinline{/api/registration/validate} utilisé dans l'extrait de code de la sous-section \ref{subsubsec:spring-web}.
+
+Les ressources réservées à l'administrateur sont protégées par le chemin \lstinline{/management/**} à l'exception du chemin \lstinline{/management/health} qui indique si le \gls{g-server} est en bonne santé ou non.
+
+\subsubsection{L'injection de dépendance}
+\label{subsubsec:dependency-injection}
+
+\paragraph{}
+Dans un programme, une partie d'un logiciel dépend très souvent d'autres parties du logiciel.
+Si le bout de code considéré devait lui-même récupérer les bouts de code dont il a besoin, il y serait fortement couplé.
+C'est à dire qu'il doit connaître le comportement du code dont il dépend sans quoi il ne sait pas s'en servir.
+Ce n'est pas forcément une mauvaise mais dans certains cas, ce n'est pas idéal.
+
+Un exemple classique est la connexion à la base de données.
+Établir la connexion à la base de données requière des informations comme son emplacement, le nom d'utilisateur et le mot de passe.
+Si chaque bout de code qui doit accéder à la base de données devaient aussi connaître ces informations, cela donnerait un code assez complexe.
+
+C'est la qu'intervient l'injection de dépendance.
+Plutôt que de devoir instancier\fnmark{} sa dépendance, c'est le \gls{g-framework} qui s'en charge et nous le fournit.
+\fntext{Créer un exemplaire concret d'une classe ou d'un modèle}
+Dans notre cas, c'est \Gls{g-spring} qui s'en charge.
+
+\paragraph{}
+Voici deux applications de l'injection de dépendance:
+Voici un premier
+\begin{lstlisting}[language=Java]
+public LoginUnavailableValidator(LearnerRepository learnerRepository) {
+    this.learnerRepository = learnerRepository;
+}
+// TRUNCATED
+learnerRepository.findAllByLoginIn(rowsByLogin.keySet()) // TRUNCATED
+\end{lstlisting}
+Et un deuxième
+\begin{lstlisting}[language=Java]
+public ExistingUserValidator(UserExtendedResourceApiClient userExtendedResourceApiClient) {
+	this.userExtendedResourceApiClient = userExtendedResourceApiClient;
+}
+// TRUNCATED
+Map<String, UserModel> existingEmail = this.userExtendedResourceApiClient.getUserByLoginMapUsingPOST(emails).getBody();
+// TRUNCATED
+\end{lstlisting}
+Le premier extrait de code fait appel à une base de données tandis que le deuxième appelle un \gls{a-api} en passant par le réseau.
+Le développeur ne voit pas la différence car c'est \Gls{g-spring} qui s'est chargé de fournir les dépendances nécessaires.
+
+En l'occurrence, il peut être intéressant de noter que la méthode du deuxième extrait de code est générée par un outil appelé Swagger sur base du code de la ressource.
+Je parle bien d'une ressource telle que celle montrée en exemple dans la sous-section \ref{subsubsec:spring-web}.
+Une autre différence est que le premier extrait de code vient de Click-and-Run tandis que le second est un extrait d'une service d'Altissia tournant actuellement en production.
+La transition entre les deux est donc triviale.
+
+\paragraph{}
+Ce mécanisme est très utile pour implémenter le patron de conception de la stratégie, comme vous le verrez dans la sous-section \ref{subsec:dependency-injection}.
