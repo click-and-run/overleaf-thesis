@@ -14,7 +14,6 @@ Une première proposition a été de séparer la phase de traitement et la phase
 En effet, seule la phase de traitement existait. 
 Lorsque l'on tentait de soumettre un fichier, soit cela réussissait, soit cela échouait et l'on recevait les journaux de l'application\fnmark.
 \fntext{Les journaux d'application sont des messages écrits par des développeurs à l'intention d'autres développeurs.}
-% TODO diagramme d'activité
 
 Une première phase de validation permet de récupérer un rapport de validation.
 Une seconde phase, répète la première pour s'assurer de la validité des données, renvoie une erreur en cas d'échec\fnmark, traite les données en cas de réussite et avertit l'utilisateur du succès.
@@ -22,7 +21,6 @@ Une seconde phase, répète la première pour s'assurer de la validité des donn
 
 Ce découpage permet à l'utilisateur de valider son travail au fur et à mesure plutôt que de le soumettre lorsqu'il est complet.
 Cela permet de réduire la latence sur le retour d'information et d'encourager les utilisateurs à utiliser l'application.
-% TODO diagramme d'activité
 
 \paragraph{}
 Un second exemple est le flux d'utilisation où j'ai proposé de réduire au maximum le nombre d'opérations.
