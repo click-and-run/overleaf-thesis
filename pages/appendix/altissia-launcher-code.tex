@@ -6,16 +6,14 @@ Lorsque l'on recycle du code, il ne s'agit pas tellement de copier coller le cod
 
 \paragraph{}
 Ce premier extrait de code vient de la définition du \textit{build}\fnmark{} Apache Ant.
-Il permet de définir le fonctionnement d'un script à un haut niveau d'abstraction.
-C'est typiquement ce que je remplace avec Rundeck.
-
 \fntext{En informatique, le \textit{build} est la phase qui consiste à transformer le code source en logiciel fonctionnel.}
+Il permet de définir le fonctionnement d'un script à un haut niveau d'abstraction.
 
 \lstinputlisting[language=XML, firstnumber=1521]{pages/appendix/altissia-launcher-build.xml}
 
 \paragraph{}
 Un deuxième extrait de code qui contient le plus gros de la logique de validation d'une question de test de niveau.
-Si vous avez un peu d'expérience en programmation, vous devriez pouvoir trouver quelques erreurs...
+Un développeur expérimenté devrait être capable de trouver quelques points à améliorer dans ce code.
 J'ai aussi enlevé quelque 200 lignes de code par souci de confidentialité.
 
 \lstinputlisting[language=java]{pages/appendix/altissia-launcher-validate-excel-question.java}

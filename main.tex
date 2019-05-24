@@ -1,4 +1,4 @@
-\documentclass[12pt]{report}
+\documentclass[12pt,twoside,openright]{report}
 \usepackage{polyglossia} % enable TeX to generate text in target language. Also add support to languages (correct quoting style, etc.)
 \setmainlanguage{french}
 \usepackage{csquotes} % required to use polyglossia apparently, also handle quotes
@@ -48,6 +48,7 @@
     \input{pages/titlepage} % title page occupies first page
     \input{pages/empty-page.tex} % title page must be followed by an ampty page
     \input{pages/titlepage} % and then a copy of itself (weird, I know)
+    \input{pages/empty-page.tex} % title page must be followed by an ampty page
 
 	% set my own counter so that I can style it however I want
 	\setcounter{page}{1}
