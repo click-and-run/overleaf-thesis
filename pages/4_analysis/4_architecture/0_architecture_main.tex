@@ -4,12 +4,12 @@
 \paragraph{}
 La création d'un site web est une tâche complexe et il convient de mettre en place des outils robustes et éprouvés plutôt que de tout créer de zéro.
 Il est aussi primordial de structurer les différents composants de l'application de manière intelligente de manière à obtenir un tout cohérent, maintenable et extensible.
-Sachant que Altissia gère une quarantaine de services différents, il est impératif que toutes ces applications aient une structure similaire, si ce n'est pas exactement la même.
+Sachant qu’Altissia gère une quarantaine de services différents, il est impératif que toutes ces applications aient une structure similaire, si ce n'est pas exactement la même.
 C'est dans cette optique que j'ai repris bon nombre des technologies employées par mon équipe.
 
 \paragraph{}
 Nous utilisons un générateur de code appelé \gls{g-jhipster}.
-C'est un projet open-source auquel j'ai eu la joie de contribuer au travers d'un module permettant de personnaliser l'\gls{a-orm} générée\cite{noauthor_generator-jhipster-db-helper_nodate}.
+C'est un projet open source auquel j'ai eu la joie de contribuer au travers d'un module permettant de personnaliser l'\gls{a-orm} générée\cite{noauthor_generator-jhipster-db-helper_nodate}.
 Il s'utilise une unique fois au début de chaque projet et il écrit les fondements de la future application.
 Je l'ai donc utilisé pour générer l'application de l'interface utilisateur et l'application du \gls{g-server}.
 
@@ -36,30 +36,30 @@ Détaillons d'abord les noeuds de ce schéma:
     \item REST API est une application \gls{g-spring} qui sert des ressources et réponds aux requêtes qu'on lui fait
 \end{itemize}
 Les flèches indiquent le sens des demandes, le noeud de côté de la queue fait la demande et celui du côté de la pointe répond.
-Lorsqu'un verbe est présent sur un lien, le noeud sujet est celui en extrémité du schéma tandis le noeud à l'autre extrémité est le complément d'objet direct.
+Lorsqu'un verbe est présent sur un lien, le sujet est le noeud situé à l'extrémité du schéma. Tandis que le noeud à l'autre extrémité est le complément d'objet direct.
 
 \paragraph{}
-Intéressons nous d'abord à l'application \gls{g-angular}.
+Intéressons-nous d'abord à l'application \gls{g-angular}.
 Elle est servie par le \gls{g-server} Nginx.
 C'est un \gls{g-server} de fichiers, il n'a pas connaissance leur utilité.
 C'est le navigateur internet de l'utilisateur qui interprète les instructions du code contenu dans les fichiers.
 Tous les fichiers ne sont pas servis en une seule fois, cela ne serait pas idéal.
-Seuls les fichiers nécessaires à afficher la page demandée sont données.
+Seuls les fichiers nécessaires à afficher la page demandée sont donnés.
 Lorsque l'utilisateur navigue dans l'application, cette dernière fera les demandes des fichiers nécessaires à son bon fonctionnement.
 
 \paragraph{}
-Peu importe le service que l'application cliente demande, elle doit passée par la passerelle (\textit{gateway} en anglais).
+Peu importe le service que l'application cliente demande, elle doit passer par la passerelle (\textit{gateway} en anglais).
 
 Comme pour chacune des applications \gls{g-java}, un \gls{g-server} Tomcat a la fonction de la faire tourner.
-Tomcat est conçu pour exécuter du code \gls{g-java} et écouter les ports réseaux de la machine sur laquelle il est installé pour les diriger vers l'application qu'il sert\cite{noauthor_apache_nodate}.
+Tomcat est conçu pour exécuter du code \gls{g-java} et écouter les ports réseau de la machine sur laquelle il est installé pour les diriger vers l'application qu'il sert\cite{noauthor_apache_nodate}.
 
-Celle-ci va tout d'abord s'occuper de vérifier la validité du \gls{a-jwt} transmis avec l'appel (l'authentification est traité en sous-section \ref{subsec:auth-feature}) et ensuite transmettre la demande.
+Celle-ci va tout d'abord s'occuper de vérifier la validité du \gls{a-jwt} transmis avec l'appel (l'authentification est traitée en sous-section \ref{subsec:auth-feature}) et ensuite transmettre la demande.
 Elle consulte la base de données des utilisateurs pour comparer l'identifiant et le mot de passe lors de l'authentification.
-J'ai implémenté un lien direct entre la passerelle et la base de données dans l'application de démonstration mais dans le cas réel de l'infrastructure logicielle d'Altissia, une passerelle existe déjà et elle s'adresse à un service dédié pour quérir les informations des utilisateurs.
+J'ai implémenté un lien direct entre la passerelle et la base de données dans l'application de démonstration, mais dans le cas réel de l'infrastructure logicielle d'Altissia, une passerelle existe déjà et elle s'adresse à un service dédié pour quérir les informations des utilisateurs.
 Elle a besoin de travailler de pair avec le registre (\textit{registry} en anglais) pour accomplir son travail.
 
 \paragraph{}
-Le registre est une application qui tient à jour un carnet d'adresse des différents services.
+Le registre est une application qui tient à jour un carnet d'adresses des différents services.
 Elle se base sur le projet Eureka de Netflix\cite{noauthor_aws_2019} pour gérer la découverte des services.
 Lorsqu'un service démarre, il renseigne qu'il est prêt à accomplir son devoir au registre.
 Le registre va alors contacter fréquemment tous les services ouverts pour s'assurer de leur disponibilité.
@@ -73,7 +73,7 @@ C'est aussi elle qui effectue les mesures présentes dans les pages d'administra
 L'\gls{a-api} est le composant qui contient la logique métier.
 C'est lui qui s'occupe de la validation et le traitement des classeurs Excel.
 Il consulte sa base de données lors de la validation et y insère des données lors du traitement.
-Selon l'utilisation qui sera fait de Click-and-Run, cette base de données sera remplacée par des appels à des services externes ou une combinaison des deux.
+Selon l'utilisation qui sera faite de Click-and-Run, cette base de données sera remplacée par des appels à des services externes ou une combinaison des deux.
 Altissia a fait le choix de structure ses logiciels en microservices où chaque élément a une responsabilité très précise et il ne fait donc pas sens que Click-and-Run gère des ressources métiers en plus de la logique de validation et traitement pour lequel il a été conçu.
 
 Comme on le voit dans la sous-section \ref{subsubsec:dependency-injection}, la différence entre utiliser un service ou une base de données est minime et passer de l'un à l'autre est trivial.
@@ -85,3 +85,4 @@ L'interface utilisateur et la passerelle sont développées dans le répertoire 
 
 \input{pages/4_analysis/4_architecture/1_spring.tex}
 \input{pages/4_analysis/4_architecture/2_angular.tex}
+

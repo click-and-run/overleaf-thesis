@@ -1,11 +1,11 @@
 \section{Lots d'informations identifiés}
 \label{sec:identified-information-packages}
-La nouvelle application est un outil qui transforme des données, mais n'utilise pas de donnée propre.
+La nouvelle application est un outil qui transforme des données, mais n'utilise pas de données propres.
 
 Altissia a fait le choix de structurer ses fonctionnalités en microservice.
 Cela veut dire que chaque service a des responsabilités délimitées et que si un service a besoin de ressources qu'il n'a pas en interne, il appelle le service responsable.
 Les données vont transiter par la nouvelle application pour rejoindre le service pertinent.
 
-Par exemple, pour l'authentification, la nouvelle application s'adressera au service dédié et en cas de succès, recevra un JWT\fnmark qui lui permettra de communiquer avec les autres \gls{a-api}.
-Ceci alors même que l'application n'a pas accès à la base des données des utilisateurs.
-\fntext{\textit{Json Web Token} est un standard permettant de représenter des revendications de manière sécurisée\cite{auth0.com_jwt.io_nodate}.}
+Par exemple, pour l'authentification, la nouvelle application s'adressera au service dédié et en cas de succès, recevra un \gls{a-jwt} qui lui permettra de communiquer avec les autres \gls{a-api}.
+Ceci alors même que l'application n'a pas accès à la base de données des utilisateurs.
+

@@ -26,7 +26,7 @@ Cela est possible grâce à quatre choses:
 \begin{itemize}
     \item Les variables \lstinline{sheetValidators}, \lstinline{workbookValidators} et \lstinline{processors} sont toutes trois injectées par \Gls{g-spring} (voir sous-section \ref{subsubsec:dependency-injection} pour plus de détails sur l'injection de dépendances)
     \item La classe définit un paramètre générique \lstinline{T} qui peut être n'importe quelle classe qui étend la classe \lstinline{Row}
-    \item Les instances de la classe \lstinline{T} sont peuplée en utilisant le mécanisme de réflexion\fnmark{}
+    \item Les instances de la classe \lstinline{T} sont peuplées en utilisant le mécanisme de réflexion\fnmark{}
     \fntext{Le mécanisme de réflexion est la capacité qu'un programme a à s'examiner lui-même.}
     \item Le patron de conception de la stratégie permet d'obtenir la stratégie adaptée pour traiter un objet sans connaitre cet objet.
 \end{itemize}
@@ -54,21 +54,21 @@ Voici l'interface d'un des trois types de stratégie:
  */
 public abstract class WorkbookValidator {
 
-	protected static final Logger log = LoggerFactory.getLogger(WorkbookValidator.class);
-	
-	/**
-	 * Assert if this validator is suitable for a particular workbook
-	 * @param definition the definition to check
-	 * @return true if this validator is suitable for the provided workbook
-	 */
-	public abstract boolean isApplicableTo(Workbook definition);
-	
-	/**
-	 * Actual validation process
-	 * @param workbook the workbook to add error / warning to
-	 * @return the number of error/warning issued by this validator
-	 */
-	public abstract long validate(Workbook workbook);
+ protected static final Logger log = LoggerFactory.getLogger(WorkbookValidator.class);
+ 
+ /**
+  * Assert if this validator is suitable for a particular workbook
+  * @param definition the definition to check
+  * @return true if this validator is suitable for the provided workbook
+  */
+ public abstract boolean isApplicableTo(Workbook definition);
+ 
+ /**
+  * Actual validation process
+  * @param workbook the workbook to add error / warning to
+  * @return the number of error/warning issued by this validator
+  */
+ public abstract long validate(Workbook workbook);
 
 }
 \end{lstlisting}
@@ -84,7 +84,8 @@ Le bloc repris dans la figure \ref{fig:class-model} est nettement orienté.
 Tous les flèches sont dirigées vers les classes modèles du \gls{g-framework}.
 
 Les cinq classes \lstinline{RegistrationWorkbook}, \lstinline{ServicesSheet}, \lstinline{RegistrantSheet}, \lstinline{ServiceRow} et \lstinline{RegistrantRow} constituent un module.
-L'ajout d'un module nécessite l'écriture ces classes là, plus éventuellement les stratégies non prévues par le \gls{g-framework}.
+L'ajout d'un module nécessite l'écriture ces classes-là, plus éventuellement les stratégies non prévues par le \gls{g-framework}.
 
 \paragraph{}
 Les classes restantes n'apportent rien de fondamentalement différent de ce qui a été abordé ici et je ne les passerai donc pas en revue.
+

@@ -8,7 +8,7 @@ Le traitement utilise les données et change l'état des bases de données des s
 
 \paragraph{}
 Le travail que je présente ici est un \gls{g-framework}, une sorte de boite à outils conçut pour répondre à une gamme de besoins.
-Il n'a donc pas d'utilité propre; on peut construire un banc avec une boite à outils et des planches, mais on ne peut pas s'asseoir que sur le banc.
+Il n'a donc pas d'utilité propre; on peut construire un banc avec une boite à outils et des planches, mais on ne peut pas s'assoir que sur le banc.
 Les besoins auxquels doivent répondre ces outils, définis dans la sous-section \ref{subsec:business-needs}, sont des exemples venant d'applications propriétaires dont je ne peux pas discuter les spécifications exactes ici.
 J'ai donc imaginé un exemple fictif qui a besoin des mêmes outils pour être satisfait.
 Cet exemple aura aussi l'avantage de répondre à une logique métier beaucoup plus simple que les cas réels.
@@ -81,4 +81,12 @@ Un email défini dans la feuille "registrants" ne peut pas être déjà présent
 
 \subsubsection{Le traitement d'un classeur}
 \label{subsubsec:spreadsheet-processing-case}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/diagrams/entity-relationship.png}
+    \caption{Le diagramme entité-relation des deux entités utilisées pour la démonstration}
+    \label{fig:entity-relationship}
+\end{figure}
+
 Le traitement de ce classeur consiste à créer les apprenants, leurs licences et les liens entre les deux à partir des informations contenues dans le classeur.
