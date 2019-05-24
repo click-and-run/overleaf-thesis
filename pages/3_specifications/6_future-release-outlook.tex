@@ -17,6 +17,7 @@ Les fonctionnalités les plus attendues sont:
     \item Traitement par lot: L'utilisateur peut soumettre de multiples fichiers en une seule passe.
     \item Gestion asynchrone: L'utilisateur lance une action et ne doit pas attendre la fin de celle-ci pour lancer l'action suivante.
     \item Notification: L'utilisateur est notifié lors de la fin d'une tâche.
+    \item Système de chargement de modules à chaud: Le développeur peut rajouter de nouvelles fonctionnalités sans redémarrer l'application
 \end{itemize}
 
 \paragraph{}
@@ -40,6 +41,10 @@ D'autres fichiers sont lents à traiter à cause des nombreux appels aux réseau
 \paragraph{}
 Du fait de la gestion asynchrone, il est nécessaire de pouvoir notifier un utilisateur de la fin d'une tâche afin qu'il n'ait pas besoin de visiter fréquemment la page des résultats.
 
+\paragraph{}
+Le projet est modulable dans sa nature, son but est de recevoir des modules.
+Il serait envisageable de pousser le système de module encore plus loin et mettre en place un système de chargement à chaud.
+
 \subsection{Prérequis techniques}
 \label{subsec:nex-version-technical-requirements}
 
@@ -54,3 +59,11 @@ Altissia utilise déjà une telle technologie dans d'autres situations et je com
 Un agent de message est un logiciel qui stocke des messages dans des fils et les conserve jusqu'à ce qu'ils soient consommés.
 Ainsi, le serveur enverra le résultat de son travail à l'agent de message plutôt que directement à l'utilisateur.
 Ceci, car ce logiciel est capable de conserver le message et le délivrer quand l'utilisateur est prêt à le recevoir.
+
+\paragraph{}
+La solution envisagée pour créer un système de module à chaud est de mettre en place une couche de liaison en Python.
+Ce langage de programmation, contrairement à \Gls{g-java} est interprété et non compilé.
+Il n'a donc pas besoin de connaître tous les composants du programmes avant son démarrage.
+
+Le projet Jython est un projet qui permet d'intégrer des programmes \Gls{g-java} à des programmes Python et réciproquement.
+Établir une couche de liaison en Python entre le coeur de l'application et les modules permettrait de les charger à chaud\cite{lutz_learning_2003}.

@@ -1,0 +1,23 @@
+\section{Le déploiement}
+\label{sec:deployment}
+
+\paragraph{}
+Altissia a choisi d'intégrer cet outil à leur application interne Altiman\fnmark{}.
+\fntext{Altiman est la contraction de Altissia et \textit{manager}.}
+Sept modèles de données sont validés à ce jour par l'application et ont permis de résoudre un blocage pour un déploiement prévu pour le 20 mai 2019.
+Ce déploiement corresponds à une demande d'un client d'Altissia et ce dernier a finalement demandé de reporter la date de déploiement pour des raisons que je ne peux pas partager ici.
+
+\paragraph{}
+Altiman lui-même n'a pas encore de dates prévues de déploiement car d'autres projets prennent la priorité.
+Toutefois, c'est déjà un pari réussi car la tâche pour laquelle a été conçue Click-and-Run a été remplie.
+Le travail a été effectué sur un environnement de développement et le résultat a été exporté sur un environnement de \gls{g-beta}.
+
+Le travail consistait a validé et ventilé des fichiers contenant des données complexes.
+Le traitement de ces fichiers a produit des entrées dans une base de données \gls{g-mysql}.
+Si tout se passe bien, cette base de données devrait se retrouver en environnement de production dans les prochaines semaines.
+
+\paragraph{}
+Le déploiement réel de l'application Altiman se fera en utilisant le processus d'intégration continue d'Altissia et les éléments de configurations nécessaires au déploiement devront être inscrits dans le plan de déploiement Helm\fnmark{} du projet.
+\fntext{Helm est un outil qui permet d'automatiser le déploiement de toutes sortes d'applications.}
+La plupart de ces valeurs sont secrètes et seules l'équipe des devops\fnmark{} y a accès.
+\fntext{L'équipe des devops est l'équipe qui se charge du déploiement des applications. Ils ont la réputation d'avoir un agenda très chargé.}
