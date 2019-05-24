@@ -8,7 +8,7 @@ These are the LaTeX sources of my thesis's report.
 This is a LaTex document, meant to be used with XeTeX and TeXLive.
 These source files are used to generate a PDF file.
 
-You can consult and download the resulting pdf on [overleaf] or grab a copy from the [releases] page.
+You can consult and download the resulting pdf on [overleaf] or grab a [copy] from the [releases] page.
 
 ## Contributing
 
@@ -22,6 +22,7 @@ Adrien Horgnies
 
 [MIT][license]
 
-[releases]: https://github.com/click-and-run/thesis/releases
+[copy]: https://github.com/click-and-run/overleaf-thesis/releases/download/1.0.0/thesis-report-no-print-no-confidential.pdf
+[releases]: https://github.com/click-and-run/overleaf-thesis/releases/tag/1.0.0
 [license]: https://github.com/click-and-run/thesis/blob/master/LICENSE.txt
 [overleaf]: https://www.overleaf.com/read/nrhnszntmwgs
